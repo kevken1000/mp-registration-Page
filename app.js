@@ -13,7 +13,7 @@ document.getElementById('deployForm').addEventListener('submit', async function(
         dnsProvider: document.querySelector('input[name="dnsProvider"]:checked').value,
         hostedZoneId: document.getElementById('hostedZoneId').value || '',
         acmCertArn: document.getElementById('acmCertArn').value || '',
-        awsRegion: document.getElementById('awsRegion').value || 'us-east-1',
+        awsRegion: 'us-east-1',
         stackName: document.getElementById('stackName').value || `mp-landing-${Date.now()}`
     };
 

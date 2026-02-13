@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Your AWS Marketplace SaaS Registration Page Live in Minutes | AWS Marketplace Blog</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Amazon Ember', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #f2f3f3; color: #16191f; line-height: 1.6; }
+        .top-nav { background: #232f3e; height: 50px; display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+        .top-nav-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 24px; }
+        .aws-logo { color: #ff9900; font-size: 18px; font-weight: 700; text-decoration: none; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #d5dbdb; font-size: 13px; text-decoration: none; }
+        .nav-links a:hover { color: #fff; }
+        .blog-header-bar { background: #fff; border-bottom: 1px solid #d5dbdb; padding: 12px 24px; }
+        .blog-header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+        .blog-category { font-size: 14px; color: #0073bb; font-weight: 600; text-decoration: none; }
+        .blog-category:hover { text-decoration: underline; }
+        .main-layout { max-width: 1200px; margin: 0 auto; display: flex; gap: 40px; padding: 32px 24px; }
+        .content-area { flex: 1; min-width: 0; }
+        .sidebar { width: 280px; flex-shrink: 0; }
+        .article { background: #fff; border: 1px solid #d5dbdb; border-radius: 2px; padding: 40px 48px; }
+        .article-meta { font-size: 13px; color: #545b64; margin-bottom: 8px; }
+        .article-meta a { color: #0073bb; text-decoration: none; }
+        .article-meta a:hover { text-decoration: underline; }
+        .article h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: #16191f; }
+        .article-byline { font-size: 13px; color: #545b64; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #eaeded; }
+        .article-byline a { color: #0073bb; text-decoration: none; }
+        .article-body p { font-size: 15px; line-height: 1.75; margin-bottom: 16px; color: #16191f; }
+        .article-body h2 { font-size: 24px; font-weight: 700; margin: 36px 0 16px; color: #16191f; }
+        .article-body h3 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; color: #16191f; }
+        .article-body a { color: #0073bb; text-decoration: none; }
+        .article-body a:hover { text-decoration: underline; }
+        .article-body ul, .article-body ol { margin: 0 0 16px 24px; font-size: 15px; line-height: 1.75; }
+        .article-body li { margin-bottom: 4px; }
+        .article-body strong { font-weight: 700; }
+        .article-body img { max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #d5dbdb; border-radius: 2px; }
+        .article-body .figure-caption { font-size: 13px; color: #545b64; font-style: italic; text-align: center; margin: -12px 0 24px; }
+        .article-body pre { background: #1b2a3d; color: #d5dbdb; padding: 16px 20px; border-radius: 4px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.6; }
+        .article-body code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; }
+        .article-body p code, .article-body li code { background: #f2f3f3; padding: 2px 6px; border-radius: 3px; color: #d13212; font-size: 13px; }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+        .article-body th { background: #fafafa; text-align: left; padding: 10px 14px; border: 1px solid #d5dbdb; font-weight: 700; font-size: 13px; color: #545b64; text-transform: uppercase; letter-spacing: 0.5px; }
+        .article-body td { padding: 10px 14px; border: 1px solid #d5dbdb; vertical-align: top; }
+        .callout { background: #f1faff; border-left: 4px solid #0073bb; padding: 16px 20px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+        .callout p { margin-bottom: 0; font-size: 14px; }
+        .callout-tip { background: #f2f8f0; border-left-color: #1d8102; }
+        .step-box { background: #fafafa; border: 1px solid #eaeded; border-radius: 4px; padding: 24px; margin: 20px 0; }
+        .step-box h3 { margin-top: 0; }
+        .sidebar-card { background: #fff; border: 1px solid #d5dbdb; border-radius: 2px; padding: 20px; margin-bottom: 20px; }
+        .sidebar-card h3 { font-size: 14px; font-weight: 700; color: #16191f; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sidebar-card ul { list-style: none; }
+        .sidebar-card li { margin-bottom: 10px; }
+        .sidebar-card a { color: #0073bb; font-size: 14px; text-decoration: none; line-height: 1.4; display: block; }
+        .sidebar-card a:hover { text-decoration: underline; }
+        .sidebar-tag { display: inline-block; background: #f2f3f3; color: #545b64; font-size: 12px; padding: 4px 10px; border-radius: 3px; margin: 0 6px 6px 0; text-decoration: none; }
+        .sidebar-tag:hover { background: #d5dbdb; text-decoration: none; }
+        .author-box { margin-top: 36px; padding-top: 24px; border-top: 1px solid #eaeded; }
+        .author-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+        .author-entry { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+        .author-avatar { width: 64px; height: 64px; background: #232f3e; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #ff9900; font-weight: 700; }
+        .author-info .author-name { font-size: 15px; font-weight: 700; color: #16191f; }
+        .author-info .author-title { font-size: 13px; color: #545b64; margin-top: 4px; line-height: 1.5; }
+        .blog-footer { background: #232f3e; color: #d5dbdb; padding: 40px 24px; margin-top: 48px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: center; font-size: 13px; }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .article { padding: 24px; }
+            .main-layout { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="#" class="aws-logo">aws</a>
+            <div class="nav-links">
+                <a href="#">Contact Us</a>
+                <a href="#">Support</a>
+                <a href="#">English ▾</a>
+                <a href="#">My Account ▾</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-header-bar">
+        <div class="blog-header-inner">
+            <a href="#" class="blog-category">AWS Marketplace Blog</a>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <main class="content-area">
+            <article class="article">
+                <div class="article-meta">
+                    <a href="#">AWS Marketplace</a> &middot; <a href="#">SaaS</a> &middot; <a href="#">Getting Started</a>
+                </div>
+                <h1>Get Your AWS Marketplace SaaS Registration Page Live in Minutes</h1>
+                <div class="article-byline">
+                    by <a href="#">Kevin Kennedy</a> | on <time>13 FEB 2026</time> | in <a href="#">AWS Marketplace</a>, <a href="#">AWS CloudFormation</a> | <a href="#">Permalink</a> &middot; <a href="#">Comments</a> &middot; <a href="#">Share</a>
+                </div>
+
+                <div class="article-body">
+
+                    <p>Listing your SaaS product on <a href="https://aws.amazon.com/marketplace">AWS Marketplace</a> puts it in front of millions of AWS customers who can subscribe and pay through their existing AWS account. Whether you use contract pricing, usage-based subscriptions, or a hybrid model, one thing every SaaS listing needs is a registration landing page connected to the AWS Marketplace APIs.</p>
+
+                    <p>Every SaaS product listed on AWS Marketplace needs a registration page. When a customer subscribes to your product, AWS Marketplace redirects them to your page so they can provide their contact details and get started, or register directly into your SaaS application. You need to host this page, integrate it with the AWS Marketplace APIs (such as <code>ResolveCustomer</code> and <code>BatchMeterUsage</code>), and store the registration data.</p>
+
+                    <p>Setting this up typically involves deploying multiple AWS services, writing Lambda functions, editing HTML, and wiring everything together. It works, but it takes time, especially if you're doing it for the first time.</p>
+
+                    <p>In this post, we walk through a sample solution that does all of this for you. You fill in a web form with your company details and branding, and it generates a single <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a> template that deploys everything, including the branded registration page itself.</p>
+
+                    <h2>What you get</h2>
+
+                    <p>One CloudFormation stack. One deployment. Here's what it creates:</p>
+
+                    <ul>
+                        <li>A <strong>branded registration page</strong> hosted on Amazon CloudFront with your logo, colors, and welcome message. Deployed automatically, no file uploads needed</li>
+                        <li>A <strong>registration API</strong> that validates the customer's token with AWS Marketplace and stores their details in Amazon DynamoDB</li>
+                        <li><strong>Email notifications</strong> via Amazon SNS every time a new customer registers</li>
+                        <li>A <strong>metering pipeline</strong> for usage-based pricing. Collects, aggregates, and submits usage data to AWS Marketplace hourly</li>
+                        <li><strong>Subscription lifecycle handling</strong> that automatically updates customer status when subscriptions are created, amended, or cancelled</li>
+                        <li>Optional <strong>custom domain</strong> support with automated SSL certificate setup</li>
+                    </ul>
+
+                    <img src="architecture-official.png" alt="Architecture diagram showing the deployed infrastructure">
+                    <div class="figure-caption">Figure 1: What gets deployed — CloudFront serves your branded page, API Gateway handles registrations, DynamoDB stores subscribers, and metering runs automatically in the background.</div>
+
+                    <h2>How it works for your customers</h2>
+
+                    <p>From your customer's perspective, the experience is straightforward:</p>
+
+                    <ol>
+                        <li>They find your product on AWS Marketplace and subscribe.</li>
+                        <li>AWS Marketplace redirects them to your registration page.</li>
+                        <li>They see a branded page with your company name and logo.</li>
+                        <li>They fill in their company name, contact person, phone, and email.</li>
+                        <li>They click "Complete registration" and see a confirmation message.</li>
+                    </ol>
+
+                    <p>Behind the scenes, the system validates their subscription with AWS Marketplace, stores their details, and sends you an email notification — all in a few seconds.</p>
+
+                    <h2>One page for all your products</h2>
+
+                    <div class="callout callout-tip">
+                        <p><strong>Key point:</strong> You only need to deploy this once. The same registration page works for all your SaaS products — current and future.</p>
+                    </div>
+
+                    <p>When AWS Marketplace redirects a customer, it includes a token that identifies which product they subscribed to. The registration system reads the product code from that token automatically.</p>
+
+                    <p>To add a new product, just set its fulfillment URL in the <a href="https://aws.amazon.com/marketplace/management/products">AWS Marketplace Management Portal</a> to the same CloudFront URL.</p>
+
+                    <h2>Getting started</h2>
+
+                    <div class="step-box">
+                        <h3>Step 1: Fill in the form</h3>
+                        <p>Open the generator in your browser. Enter your company name, admin email, and optionally customize the branding (logo, colors, welcome message). A live preview shows you what the registration page will look like.</p>
+                        <img src="screenshots/generator-form.png" alt="Screenshot of the generator form filled in with sample company details and branding options">
+                        <div class="figure-caption">Figure 2: The generator form with company details and branding customization</div>
+                        <img src="screenshots/generator-preview.png" alt="Screenshot of the live preview showing the branded header with logo and custom colors">
+                        <div class="figure-caption">Figure 3: Live preview updates as you change branding settings</div>
+                    </div>
+
+                    <div class="step-box">
+                        <h3>Step 2: Generate and deploy</h3>
+                        <p>Click <strong>Generate Deployment Package</strong>. Download the CloudFormation template, then click <strong>Launch in AWS Console</strong>. The CloudFormation console opens with your parameters pre-filled. Upload the template, review, and click <strong>Create stack</strong>. Deployment takes about 5 minutes.</p>
+                        <img src="screenshots/generator-output.png" alt="Screenshot of the generated output section showing the download button and Launch in AWS Console button">
+                        <div class="figure-caption">Figure 4: The output section with download link and one-click console launch</div>
+                    </div>
+
+                    <div class="step-box">
+                        <h3>Step 3: Connect to your product listing</h3>
+                        <p>After the stack is created, copy the CloudFront URL from the stack outputs. Go to the <a href="https://aws.amazon.com/marketplace/management/products">Marketplace Management Portal</a> and set it as the fulfillment URL for your product. Also check your email and confirm the SNS notification subscription.</p>
+                        <img src="screenshots/stack-outputs.png" alt="Screenshot of CloudFormation stack outputs showing the CloudFront URL, API endpoint, and table names">
+                        <div class="figure-caption">Figure 5: CloudFormation stack outputs with the CloudFront URL to use as your fulfillment URL</div>
+                    </div>
+
+                    <p>That's the entire setup. Your registration page is live.</p>
+
+                    <img src="screenshots/deployed-page.png" alt="Screenshot of the deployed branded registration page as seen by a customer">
+                    <div class="figure-caption">Figure 6: The deployed registration page your customers will see</div>
+
+                    <h2>Branding your page</h2>
+
+                    <p>The generator lets you customize four things:</p>
+
+                    <table>
+                        <thead>
+                            <tr><th>Setting</th><th>What it does</th><th>Default</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Company logo</td><td>Displayed in the header bar</td><td>Company name text only</td></tr>
+                            <tr><td>Primary color</td><td>Buttons, focus states, accents</td><td>#0073bb (AWS blue)</td></tr>
+                            <tr><td>Header color</td><td>Top navigation bar background</td><td>#232f3e (AWS dark)</td></tr>
+                            <tr><td>Welcome message</td><td>Subtitle below the page heading</td><td>"Complete your registration to get started"</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>These are CloudFormation parameters, so you can update them later with a stack update — no need to regenerate the template.</p>
+
+                    <h2>Using your own domain</h2>
+
+                    <p>By default, your page is served from a CloudFront URL like <code>d1234abcdef.cloudfront.net</code>. If you want to use your own domain (for example, <code>register.yourcompany.com</code>), the generator supports two options:</p>
+
+                    <p><strong>If your domain is on Amazon Route 53:</strong> Just provide the Hosted Zone ID. The stack handles everything — creates the SSL certificate, validates it, and adds the DNS record. Fully automated.</p>
+
+                    <p><strong>If your domain is on another provider</strong> (GoDaddy, Cloudflare, etc.): Create an SSL certificate in <a href="https://aws.amazon.com/certificate-manager/">AWS Certificate Manager</a> in the <code>us-east-1</code> region first, then provide the certificate ARN. After deployment, add a CNAME record pointing your domain to the CloudFront URL.</p>
+
+                    <h2>Metering for usage-based pricing</h2>
+
+                    <p>If your product uses usage-based pricing (SaaS Subscription or Contract with Consumption), the stack includes a complete metering pipeline that runs automatically:</p>
+
+                    <ol>
+                        <li>Your application writes usage records to a DynamoDB table (for example: "customer X used 100 API calls on product Y").</li>
+                        <li>Every hour, a background job aggregates the pending records.</li>
+                        <li>The aggregated usage is submitted to the AWS Marketplace <code>BatchMeterUsage</code> API.</li>
+                        <li>Each record is marked as processed, and cumulative totals are tracked per customer.</li>
+                    </ol>
+
+                    <p>For contract-only products, the metering resources are still deployed but not required. They sit idle at negligible cost.</p>
+
+                    <div class="callout">
+                        <p>For detailed metering integration instructions and code examples in Node.js and Python, see our companion post: <a href="blog-metering.html">Integrating Usage Metering with Your AWS Marketplace SaaS Product</a>.</p>
+                    </div>
+
+                    <h2>What happens when subscriptions change</h2>
+
+                    <p>The stack automatically listens for subscription lifecycle events from AWS Marketplace:</p>
+
+                    <table>
+                        <thead>
+                            <tr><th>Event</th><th>What happens</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Customer subscribes</td><td>Registration stored, you get an email</td></tr>
+                            <tr><td>Subscription amended (upgrade/downgrade)</td><td>Status updated, you get an email</td></tr>
+                            <tr><td>Subscription cancelled</td><td>Status set to "cancelled", you get an email</td></tr>
+                            <tr><td>License updated or deprovisioned</td><td>Status updated accordingly, you get an email</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p>No polling, no manual checks. You always have an up-to-date view of your subscribers in DynamoDB, and you're notified of every change via email.</p>
+
+                    <h2>Things to know</h2>
+
+                    <ul>
+                        <li><strong>Deployment takes about 5 minutes.</strong> If you're using Route 53 for a custom domain, certificate validation may add a few more minutes.</li>
+                        <li><strong>The fulfillment URL is a manual step.</strong> After deployment, you need to set it in the Marketplace Management Portal. This can't be automated because it's part of your product listing configuration.</li>
+                        <li><strong>Deleting the stack?</strong> Use <code>--retain-resources RedirectFunction</code> in the delete command. The Lambda@Edge function takes up to an hour to fully clean up from CloudFront edge locations. You can delete it manually later.</li>
+                        <li><strong>Updated your branding?</strong> After a stack update, run a CloudFront cache invalidation (<code>aws cloudfront create-invalidation --distribution-id &lt;ID&gt; --paths "/*"</code>) to see changes immediately.</li>
+                        <li><strong>All Lambda functions use Node.js 18</strong> with AWS SDK v3, which is included in the runtime — no dependencies to manage.</li>
+                    </ul>
+
+                    <h2>Cleanup</h2>
+
+                    <p>To remove everything:</p>
+
+<pre><code>aws cloudformation delete-stack \
+    --stack-name my-marketplace-landing \
+    --retain-resources RedirectFunction \
+    --region us-east-1</code></pre>
+
+                    <h2>Conclusion</h2>
+
+                    <p>Getting a SaaS registration page live on AWS Marketplace doesn't need to be a multi-hour project. This tool generates a single CloudFormation template that handles the infrastructure, the registration flow, the branding, metering, and subscription lifecycle — so you can focus on your product instead of plumbing.</p>
+
+                    <p>The source code is available on GitHub: <a href="#">[repository link]</a></p>
+
+                    <p>To learn more about listing SaaS products on AWS Marketplace:</p>
+
+                    <ul>
+                        <li><a href="https://aws.amazon.com/blogs/awsmarketplace/step-by-step-guide-to-saas-integration-with-aws-marketplace/">Step-by-Step Guide to SaaS Integration with AWS Marketplace</a></li>
+                        <li><a href="https://aws.amazon.com/blogs/awsmarketplace/how-to-launch-a-saas-product-in-aws-marketplace/">How to launch a SaaS product in AWS Marketplace</a></li>
+                        <li><a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-products.html">AWS Marketplace Seller Guide — SaaS Products</a></li>
+                    </ul>
+
+                    <div class="author-box">
+                        <h3>About the author</h3>
+                        <div class="author-entry">
+                            <div class="author-avatar">K</div>
+                            <div class="author-info">
+                                <div class="author-name">Kevin Kennedy</div>
+                                <div class="author-title">Kevin is a Solutions Architect at Amazon Web Services, focused on helping ISV partners integrate with AWS Marketplace. He specializes in serverless architectures and developer tooling.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>Related Posts</h3>
+                <ul>
+                    <li><a href="https://aws.amazon.com/blogs/awsmarketplace/step-by-step-guide-to-saas-integration-with-aws-marketplace/">Step-by-Step Guide to SaaS Integration with AWS Marketplace</a></li>
+                    <li><a href="https://aws.amazon.com/blogs/awsmarketplace/how-to-launch-a-saas-product-in-aws-marketplace/">How to launch a SaaS product in AWS Marketplace</a></li>
+                    <li><a href="https://aws.amazon.com/blogs/awsmarketplace/speed-product-provisioning-customized-saas-landing-page-fields/">Speed product provisioning with customized SaaS landing page fields</a></li>
+                    <li><a href="https://aws.amazon.com/blogs/awsmarketplace/successfully-testing-your-saas-listing-in-aws-marketplace/">Successfully testing your SaaS listing in AWS Marketplace</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-card">
+                <h3>Tags</h3>
+                <div>
+                    <a href="#" class="sidebar-tag">AWS Marketplace</a>
+                    <a href="#" class="sidebar-tag">SaaS</a>
+                    <a href="#" class="sidebar-tag">CloudFormation</a>
+                    <a href="#" class="sidebar-tag">Serverless</a>
+                    <a href="#" class="sidebar-tag">Registration</a>
+                    <a href="#" class="sidebar-tag">Metering</a>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://aws.amazon.com/marketplace/management/products">Marketplace Management Portal</a></li>
+                    <li><a href="https://docs.aws.amazon.com/marketplace/latest/userguide/saas-products.html">SaaS Seller Guide</a></li>
+                    <li><a href="https://github.com/aws-samples/aws-marketplace-serverless-saas-integration">Reference Implementation</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="blog-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026, Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
