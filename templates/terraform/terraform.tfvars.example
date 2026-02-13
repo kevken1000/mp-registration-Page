@@ -1,0 +1,20 @@
+# Required
+company_name = "Your Company"
+admin_email  = "admin@example.com"
+
+# Optional: resource name prefix
+# stack_name = "mp-landing"
+
+# Optional: branding
+# primary_color   = "#0073bb"
+# header_color    = "#232f3e"
+# logo_url        = "https://example.com/logo.png"
+# welcome_message = "Complete your registration to get started"
+
+# Optional: custom domain with Route 53
+# custom_domain  = "register.yourcompany.com"
+# hosted_zone_id = "Z0123456789ABCDEFGHIJ"
+
+# Optional: custom domain with external DNS
+# custom_domain       = "register.yourcompany.com"
+# acm_certificate_arn = "arn:aws:acm:us-east-1:123456789:certificate/abc-123"

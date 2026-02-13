@@ -139,11 +139,27 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 - AWS CLI configured (for CLI deployment) or AWS Console access
 - (Optional) Custom domain + Route 53 hosted zone or pre-created ACM cert
 
+## Terraform
+
+A Terraform version is also available in `templates/terraform/`. It deploys the same infrastructure.
+
+```bash
+cd templates/terraform
+cp terraform.tfvars.example terraform.tfvars
+# Edit terraform.tfvars with your values
+terraform init
+terraform plan
+terraform apply
+```
+
+After deployment, the outputs include the CloudFront URL, API endpoint, and table names — same as the CloudFormation version.
+
 ## Files
 
 | File | Purpose |
 |------|---------|
 | `templates/cloudformation-template.yaml` | The CloudFormation template |
+| `templates/terraform/` | Terraform module (equivalent to the CloudFormation template) |
 | `blog.html` | Blog post: registration page solution |
 | `blog-metering.html` | Blog post: metering integration guide |
 | `METERING.md` | Metering integration reference |
