@@ -1,6 +1,6 @@
 # AWS Marketplace SaaS Registration Page Deployer
 
-A web-based tool that generates a complete CloudFormation deployment package for branded AWS Marketplace SaaS registration landing pages.
+Deploy a branded AWS Marketplace SaaS registration landing page using CloudFormation or Terraform.
 
 ## What This Solves
 
@@ -8,9 +8,11 @@ Every SaaS product listed on AWS Marketplace needs a registration page that inte
 
 ## Quick Start
 
-Download the CloudFormation template and deploy it in `us-east-1`:
+Choose CloudFormation or Terraform. Both deploy the same infrastructure in `us-east-1`.
 
-### AWS Console
+### Option A: CloudFormation
+
+#### AWS Console
 
 1. Download `templates/cloudformation-template.yaml`
 2. Open the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create)
@@ -30,7 +32,18 @@ aws cloudformation create-stack \
     --region us-east-1
 ```
 
-After deployment (~5 minutes):
+### Option B: Terraform
+
+```bash
+cd templates/terraform
+cp terraform.tfvars.example terraform.tfvars
+# Edit terraform.tfvars with your company name and email
+terraform init
+terraform plan
+terraform apply
+```
+
+### After deployment (~5 minutes)
 
 1. Confirm the SNS email subscription
 2. Copy the CloudFront URL from the stack outputs
@@ -38,15 +51,15 @@ After deployment (~5 minutes):
 
 ## How It Works
 
-1. Deploy the CloudFormation template with your company name and email
+1. Deploy using CloudFormation or Terraform with your company name and email
 2. Confirm the SNS email subscription
 3. Set the fulfillment URL in the Marketplace Management Portal
 
-The template deploys everything, including the branded landing page itself (via a CloudFormation custom resource). No manual file uploads needed.
+Both options deploy everything, including the branded landing page itself. No manual file uploads needed.
 
 ## What Gets Deployed
 
-One CloudFormation stack in `us-east-1` creates:
+One deployment in `us-east-1` creates:
 
 - S3 bucket (private, CloudFront OAI) for the landing page
 - CloudFront distribution with Lambda@Edge POST-to-GET redirect
@@ -82,13 +95,13 @@ Two options:
 
 ## Branding
 
-The generator supports:
+Both templates support:
 - Company logo URL
 - Primary color (buttons, accents)
 - Header background color
 - Custom welcome message
 
-These are passed as CloudFormation parameters and used by the custom resource Lambda to generate the branded landing page. You can update them later with a stack update.
+These are passed as parameters (CloudFormation) or variables (Terraform). You can update them later with a stack update or `terraform apply`.
 
 ## Architecture
 
@@ -136,23 +149,8 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 - AWS account with Marketplace seller registration
 - SaaS product listing (Limited or Public)
-- AWS CLI configured (for CLI deployment) or AWS Console access
+- AWS CLI configured (for CloudFormation) or Terraform installed (for Terraform)
 - (Optional) Custom domain + Route 53 hosted zone or pre-created ACM cert
-
-## Terraform
-
-A Terraform version is also available in `templates/terraform/`. It deploys the same infrastructure.
-
-```bash
-cd templates/terraform
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your values
-terraform init
-terraform plan
-terraform apply
-```
-
-After deployment, the outputs include the CloudFront URL, API endpoint, and table names — same as the CloudFormation version.
 
 ## Files
 
@@ -169,8 +167,8 @@ After deployment, the outputs include the CloudFront URL, API endpoint, and tabl
 
 ## Known Issues
 
-- Lambda@Edge functions take up to an hour to delete after stack deletion. Use `--retain-resources RedirectFunction` if you need to delete the stack quickly.
-- After updating branding parameters via stack update, run a CloudFront cache invalidation to see changes immediately.
+- Lambda@Edge functions take up to an hour to delete after stack deletion. For CloudFormation, use `--retain-resources RedirectFunction` if you need to delete the stack quickly. For Terraform, re-run `terraform destroy` after a few minutes if it times out.
+- After updating branding parameters, run a CloudFront cache invalidation to see changes immediately.
 
 ## See Also
 
