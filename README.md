@@ -4,7 +4,7 @@ A web-based tool that generates a complete CloudFormation deployment package for
 
 ## What This Solves
 
-The [AWS workshop solution](https://catalog.workshops.aws/mpseller/en-US/saas/integration-with-quickstart) requires manual HTML editing, Lambda modification, Cloud9 setup, and SAM CLI. This tool replaces all of that with a web form that outputs a ready-to-deploy CloudFormation template.
+Every SaaS product listed on AWS Marketplace needs a registration page that integrates with the Marketplace APIs (such as `ResolveCustomer` and `BatchMeterUsage`) and stores customer registration data. This template handles all of that in a single deployment.
 
 ## Quick Start
 
