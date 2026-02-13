@@ -8,48 +8,41 @@ The [AWS workshop solution](https://catalog.workshops.aws/mpseller/en-US/saas/in
 
 ## Quick Start
 
-### Option 1: Use the hosted generator
+Download the CloudFormation template and deploy it in `us-east-1`:
 
-Visit the hosted generator page, fill in your details, and download the template.
+### AWS Console
 
-### Option 2: Run locally
+1. Download `templates/cloudformation-template.yaml`
+2. Open the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create)
+3. Upload the template, fill in the parameters (only `CompanyName` and `AdminEmail` are required)
+4. Click Create stack
 
-```bash
-git clone https://github.com/kevken1000/mp-registration-Page.git
-open index.html
-```
-
-### Option 3: Host the generator yourself
-
-Deploy the generator hosting stack, then upload the files:
+### AWS CLI
 
 ```bash
 aws cloudformation create-stack \
-    --stack-name mp-generator \
-    --template-body file://generator-hosting.yaml \
+    --stack-name my-marketplace-landing \
+    --template-body file://templates/cloudformation-template.yaml \
+    --capabilities CAPABILITY_IAM \
+    --parameters \
+        ParameterKey=CompanyName,ParameterValue="Your Company" \
+        ParameterKey=AdminEmail,ParameterValue=admin@example.com \
     --region us-east-1
-
-aws cloudformation wait stack-create-complete --stack-name mp-generator --region us-east-1
-
-# Get the bucket name and URL from outputs
-aws cloudformation describe-stacks --stack-name mp-generator --query 'Stacks[0].Outputs' --region us-east-1
-
-# Upload files (replace BUCKET with the BucketName from outputs)
-aws s3 sync . s3://BUCKET --exclude "*" \
-    --include "index.html" --include "app.js" \
-    --include "templates/*" --include "architecture-official.png" \
-    --include "blog.html" --include "blog-metering.html"
 ```
+
+After deployment (~5 minutes):
+
+1. Confirm the SNS email subscription
+2. Copy the CloudFront URL from the stack outputs
+3. Set it as the fulfillment URL in the [Marketplace Management Portal](https://aws.amazon.com/marketplace/management/products)
 
 ## How It Works
 
-1. Fill in company name, email, and branding preferences
-2. Click "Generate Deployment Package"
-3. Download `marketplace-template.yaml`
-4. Click "Launch in AWS Console" or use the CLI commands
-5. Set the fulfillment URL in the Marketplace Management Portal
+1. Deploy the CloudFormation template with your company name and email
+2. Confirm the SNS email subscription
+3. Set the fulfillment URL in the Marketplace Management Portal
 
-The generated template deploys everything, including the branded landing page itself (via a CloudFormation custom resource). No manual file uploads needed.
+The template deploys everything, including the branded landing page itself (via a CloudFormation custom resource). No manual file uploads needed.
 
 ## What Gets Deployed
 
@@ -150,13 +143,13 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Generator web form |
-| `app.js` | Form logic, template generation |
-| `templates/cloudformation-template.yaml` | Standalone template (same as generated) |
-| `generator-hosting.yaml` | CloudFormation template to host the generator |
+| `templates/cloudformation-template.yaml` | The CloudFormation template |
 | `blog.html` | Blog post: registration page solution |
 | `blog-metering.html` | Blog post: metering integration guide |
 | `METERING.md` | Metering integration reference |
+| `index.html` | Optional: web-based generator form |
+| `app.js` | Optional: generator form logic |
+| `generator-hosting.yaml` | Optional: CloudFormation template to host the generator |
 
 ## Known Issues
 

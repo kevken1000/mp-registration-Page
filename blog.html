@@ -109,7 +109,7 @@
 
                     <p>Setting this up typically involves deploying multiple AWS services, writing Lambda functions, editing HTML, and wiring everything together. It works, but it takes time, especially if you're doing it for the first time.</p>
 
-                    <p>In this post, we walk through a sample solution that does all of this for you. You fill in a web form with your company details and branding, and it generates a single <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a> template that deploys everything, including the branded registration page itself.</p>
+                    <p>In this post, we walk through a sample solution that does all of this for you. A single <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a> template deploys everything, including the branded registration page itself. You provide your company name, branding preferences, and email as CloudFormation parameters, and the stack takes care of the rest.</p>
 
                     <h2>What you get</h2>
 
@@ -153,59 +153,79 @@
 
                     <h2>Getting started</h2>
 
+                    <h3>Prerequisites</h3>
+
+                    <ul>
+                        <li>An AWS account with Marketplace seller registration</li>
+                        <li>A SaaS product listing (Limited or Public)</li>
+                        <li>AWS CLI configured, or access to the AWS Console</li>
+                    </ul>
+
                     <div class="step-box">
-                        <h3>Step 1: Fill in the form</h3>
-                        <p>Open the generator in your browser. Enter your company name, admin email, and optionally customize the branding (logo, colors, welcome message). A live preview shows you what the registration page will look like.</p>
-                        <img src="screenshots/generator-form.png" alt="Screenshot of the generator form filled in with sample company details and branding options">
-                        <div class="figure-caption">Figure 2: The generator form with company details and branding customization</div>
-                        <img src="screenshots/generator-preview.png" alt="Screenshot of the live preview showing the branded header with logo and custom colors">
-                        <div class="figure-caption">Figure 3: Live preview updates as you change branding settings</div>
+                        <h3>Step 1: Deploy the template</h3>
+                        <p>Download the CloudFormation template from the <a href="#">GitHub repository</a> and deploy it in <code>us-east-1</code>. You can use the AWS Console or the CLI:</p>
+
+<pre><code>aws cloudformation create-stack \
+    --stack-name my-marketplace-landing \
+    --template-body file://cloudformation-template.yaml \
+    --capabilities CAPABILITY_IAM \
+    --parameters \
+        ParameterKey=CompanyName,ParameterValue="Your Company" \
+        ParameterKey=AdminEmail,ParameterValue=admin@example.com \
+    --region us-east-1</code></pre>
+
+                        <p>The only required parameters are <code>CompanyName</code> and <code>AdminEmail</code>. Branding and custom domain parameters are optional. Deployment takes about 5 minutes.</p>
                     </div>
 
                     <div class="step-box">
-                        <h3>Step 2: Generate and deploy</h3>
-                        <p>Click <strong>Generate Deployment Package</strong>. Download the CloudFormation template, then click <strong>Launch in AWS Console</strong>. The CloudFormation console opens with your parameters pre-filled. Upload the template, review, and click <strong>Create stack</strong>. Deployment takes about 5 minutes.</p>
-                        <img src="screenshots/generator-output.png" alt="Screenshot of the generated output section showing the download button and Launch in AWS Console button">
-                        <div class="figure-caption">Figure 4: The output section with download link and one-click console launch</div>
+                        <h3>Step 2: Confirm the SNS subscription</h3>
+                        <p>Check the admin email inbox and confirm the SNS notification subscription. This enables email alerts for new registrations and subscription changes.</p>
                     </div>
 
                     <div class="step-box">
-                        <h3>Step 3: Connect to your product listing</h3>
-                        <p>After the stack is created, copy the CloudFront URL from the stack outputs. Go to the <a href="https://aws.amazon.com/marketplace/management/products">Marketplace Management Portal</a> and set it as the fulfillment URL for your product. Also check your email and confirm the SNS notification subscription.</p>
+                        <h3>Step 3: Set the fulfillment URL</h3>
+                        <p>Get the CloudFront URL from the stack outputs:</p>
+
+<pre><code>aws cloudformation describe-stacks \
+    --stack-name my-marketplace-landing \
+    --query 'Stacks[0].Outputs' \
+    --region us-east-1</code></pre>
+
+                        <p>Go to the <a href="https://aws.amazon.com/marketplace/management/products">Marketplace Management Portal</a> and set the CloudFront URL as the fulfillment URL for your product.</p>
                         <img src="screenshots/stack-outputs.png" alt="Screenshot of CloudFormation stack outputs showing the CloudFront URL, API endpoint, and table names">
-                        <div class="figure-caption">Figure 5: CloudFormation stack outputs with the CloudFront URL to use as your fulfillment URL</div>
+                        <div class="figure-caption">Figure 2: CloudFormation stack outputs with the CloudFront URL to use as your fulfillment URL</div>
                     </div>
 
                     <p>That's the entire setup. Your registration page is live.</p>
 
                     <img src="screenshots/deployed-page.png" alt="Screenshot of the deployed branded registration page as seen by a customer">
-                    <div class="figure-caption">Figure 6: The deployed registration page your customers will see</div>
+                    <div class="figure-caption">Figure 3: The deployed registration page your customers will see</div>
 
                     <h2>Branding your page</h2>
 
-                    <p>The generator lets you customize four things:</p>
+                    <p>The template accepts four optional branding parameters:</p>
 
                     <table>
                         <thead>
-                            <tr><th>Setting</th><th>What it does</th><th>Default</th></tr>
+                            <tr><th>Parameter</th><th>What it does</th><th>Default</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Company logo</td><td>Displayed in the header bar</td><td>Company name text only</td></tr>
-                            <tr><td>Primary color</td><td>Buttons, focus states, accents</td><td>#0073bb (AWS blue)</td></tr>
-                            <tr><td>Header color</td><td>Top navigation bar background</td><td>#232f3e (AWS dark)</td></tr>
-                            <tr><td>Welcome message</td><td>Subtitle below the page heading</td><td>"Complete your registration to get started"</td></tr>
+                            <tr><td><code>LogoUrl</code></td><td>Displayed in the header bar</td><td>Company name text only</td></tr>
+                            <tr><td><code>PrimaryColor</code></td><td>Buttons, focus states, accents</td><td>#0073bb (AWS blue)</td></tr>
+                            <tr><td><code>HeaderColor</code></td><td>Top navigation bar background</td><td>#232f3e (AWS dark)</td></tr>
+                            <tr><td><code>WelcomeMessage</code></td><td>Subtitle below the page heading</td><td>"Complete your registration to get started"</td></tr>
                         </tbody>
                     </table>
 
-                    <p>These are CloudFormation parameters, so you can update them later with a stack update — no need to regenerate the template.</p>
+                    <p>These are CloudFormation parameters, so you can update them later with a stack update.</p>
 
                     <h2>Using your own domain</h2>
 
-                    <p>By default, your page is served from a CloudFront URL like <code>d1234abcdef.cloudfront.net</code>. If you want to use your own domain (for example, <code>register.yourcompany.com</code>), the generator supports two options:</p>
+                    <p>By default, your page is served from a CloudFront URL like <code>d1234abcdef.cloudfront.net</code>. If you want to use your own domain (for example, <code>register.yourcompany.com</code>), the template supports two options:</p>
 
-                    <p><strong>If your domain is on Amazon Route 53:</strong> Just provide the Hosted Zone ID. The stack handles everything — creates the SSL certificate, validates it, and adds the DNS record. Fully automated.</p>
+                    <p><strong>If your domain is on Amazon Route 53:</strong> Provide the <code>CustomDomain</code> and <code>HostedZoneId</code> parameters. The stack creates the SSL certificate, validates it via DNS, and adds the DNS record. Fully automated.</p>
 
-                    <p><strong>If your domain is on another provider</strong> (GoDaddy, Cloudflare, etc.): Create an SSL certificate in <a href="https://aws.amazon.com/certificate-manager/">AWS Certificate Manager</a> in the <code>us-east-1</code> region first, then provide the certificate ARN. After deployment, add a CNAME record pointing your domain to the CloudFront URL.</p>
+                    <p><strong>If your domain is on another provider</strong> (GoDaddy, Cloudflare, etc.): Create an SSL certificate in <a href="https://aws.amazon.com/certificate-manager/">AWS Certificate Manager</a> in the <code>us-east-1</code> region first, then provide the <code>CustomDomain</code> and <code>AcmCertificateArn</code> parameters. After deployment, add a CNAME record pointing your domain to the CloudFront URL.</p>
 
                     <h2>Metering for usage-based pricing</h2>
 
