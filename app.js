@@ -164,7 +164,7 @@ Resources:
   SubscribersTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '\${AWS::StackName}-SubscribersV2'
+      TableName: !Sub '\${AWS::StackName}-Subscribers'
       AttributeDefinitions:
         - AttributeName: productCode
           AttributeType: S
@@ -191,7 +191,7 @@ Resources:
   MeteringTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '\${AWS::StackName}-MeteringRecordsV2'
+      TableName: !Sub '\${AWS::StackName}-MeteringRecords'
       AttributeDefinitions:
         - AttributeName: customerAWSAccountId
           AttributeType: S

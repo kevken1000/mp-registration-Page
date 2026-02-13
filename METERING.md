@@ -39,7 +39,7 @@ Your App → DynamoDB (Metering Records)
 
 ## Recording Usage
 
-Your application should write usage records to the `<StackName>-MeteringRecordsV2` DynamoDB table:
+Your application should write usage records to the `<StackName>-MeteringRecords` DynamoDB table:
 
 ### Record Format
 
@@ -75,7 +75,7 @@ const dynamodb = DynamoDBDocumentClient.from(new DynamoDBClient());
 
 async function recordUsage(customerAWSAccountId, productCode, dimension, quantity) {
     await dynamodb.send(new PutCommand({
-        TableName: 'YOUR_STACK_NAME-MeteringRecordsV2',
+        TableName: 'YOUR_STACK_NAME-MeteringRecords',
         Item: {
             customerAWSAccountId,
             productCode,
@@ -100,7 +100,7 @@ import boto3
 import time
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('YOUR_STACK_NAME-MeteringRecordsV2')
+table = dynamodb.Table('YOUR_STACK_NAME-MeteringRecords')
 
 def record_usage(customer_aws_account_id, product_code, dimension, quantity):
     table.put_item(
@@ -160,7 +160,7 @@ This solution supports sellers with multiple AWS Marketplace products:
 ```bash
 # Get all metering records for a specific product
 aws dynamodb query \
-  --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+  --table-name YOUR_STACK_NAME-MeteringRecords \
   --index-name ProductCodeIndex \
   --key-condition-expression "productCode = :code" \
   --expression-attribute-values '{":code":{"S":"abc123xyz456"}}'
@@ -180,7 +180,7 @@ aws dynamodb query \
 
 ```bash
 aws dynamodb query \
-  --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+  --table-name YOUR_STACK_NAME-MeteringRecords \
   --index-name PendingMeteringRecordsIndex \
   --key-condition-expression "metering_pending = :pending" \
   --expression-attribute-values '{":pending":{"S":"true"}}'
@@ -190,7 +190,7 @@ aws dynamodb query \
 
 ```bash
 aws dynamodb scan \
-  --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+  --table-name YOUR_STACK_NAME-MeteringRecords \
   --filter-expression "metering_failed = :failed" \
   --expression-attribute-values '{":failed":{"BOOL":true}}'
 ```
@@ -271,7 +271,7 @@ Grant your application IAM permissions to write to the metering table:
       "Action": [
         "dynamodb:PutItem"
       ],
-      "Resource": "arn:aws:dynamodb:REGION:ACCOUNT:table/YOUR_STACK_NAME-MeteringRecordsV2"
+      "Resource": "arn:aws:dynamodb:REGION:ACCOUNT:table/YOUR_STACK_NAME-MeteringRecords"
     }
   ]
 }

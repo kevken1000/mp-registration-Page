@@ -112,7 +112,7 @@ API Gateway → Register Lambda → ResolveCustomer API
 
 ## DynamoDB Schema
 
-### Subscribers Table (`<StackName>-SubscribersV2`)
+### Subscribers Table (`<StackName>-Subscribers`)
 
 | Key | Attribute | Type |
 |-----|-----------|------|
@@ -123,7 +123,7 @@ GSI `CustomerIndex`: `customerAWSAccountId` (HASH) + `productCode` (RANGE)
 
 Additional attributes: `customerIdentifier`, `companyName`, `contactPerson`, `contactPhone`, `contactEmail`, `registrationDate`, `status`, `totalMeteringSent` (map)
 
-### Metering Table (`<StackName>-MeteringRecordsV2`)
+### Metering Table (`<StackName>-MeteringRecords`)
 
 | Key | Attribute | Type |
 |-----|-----------|------|
@@ -154,7 +154,6 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 ## Known Issues
 
 - Lambda@Edge functions take up to an hour to delete after stack deletion. Use `--retain-resources RedirectFunction` if you need to delete the stack quickly.
-- CloudFormation can't replace custom-named DynamoDB tables in-place. Tables use the `V2` suffix to avoid conflicts with older deployments.
 - After updating branding parameters via stack update, run a CloudFront cache invalidation to see changes immediately.
 
 ## See Also

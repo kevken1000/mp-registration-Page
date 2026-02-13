@@ -139,7 +139,7 @@
 
                     <h2>Writing usage records</h2>
 
-                    <p>Each usage record goes into the <code>&lt;StackName&gt;-MeteringRecordsV2</code> DynamoDB table. Here are the required fields:</p>
+                    <p>Each usage record goes into the <code>&lt;StackName&gt;-MeteringRecords</code> DynamoDB table. Here are the required fields:</p>
 
                     <table>
                         <thead>
@@ -188,7 +188,7 @@ await recordUsage('123456789012', 'def789uvw', 'users', 5);</code></pre>
 import time
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('YOUR_STACK_NAME-MeteringRecordsV2')
+table = dynamodb.Table('YOUR_STACK_NAME-MeteringRecords')
 
 def record_usage(customer_aws_account_id, product_code,
                  dimension, quantity):
@@ -233,7 +233,7 @@ record_usage('123456789012', 'def789uvw', 'transactions', 50)</code></pre>
                     <p>You can query metering records for a specific product using the <code>ProductCodeIndex</code> GSI:</p>
 
 <pre><code>aws dynamodb query \
-    --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+    --table-name YOUR_STACK_NAME-MeteringRecords \
     --index-name ProductCodeIndex \
     --key-condition-expression "productCode = :code" \
     --expression-attribute-values '{":code":{"S":"abc123xyz"}}'</code></pre>
@@ -245,7 +245,7 @@ record_usage('123456789012', 'def789uvw', 'transactions', 50)</code></pre>
                     <p>Records waiting to be submitted:</p>
 
 <pre><code>aws dynamodb query \
-    --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+    --table-name YOUR_STACK_NAME-MeteringRecords \
     --index-name PendingMeteringRecordsIndex \
     --key-condition-expression "metering_pending = :p" \
     --expression-attribute-values '{":p":{"S":"true"}}'</code></pre>
@@ -255,7 +255,7 @@ record_usage('123456789012', 'def789uvw', 'transactions', 50)</code></pre>
                     <p>Records that failed to submit:</p>
 
 <pre><code>aws dynamodb scan \
-    --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+    --table-name YOUR_STACK_NAME-MeteringRecords \
     --filter-expression "metering_failed = :f" \
     --expression-attribute-values '{":f":{"BOOL":true}}'</code></pre>
 
@@ -283,7 +283,7 @@ aws logs tail /aws/lambda/YOUR_STACK_NAME-MeteringProcessor --follow</code></pre
                     <p>To retry failed records, update them to reset the pending flag:</p>
 
 <pre><code>aws dynamodb update-item \
-    --table-name YOUR_STACK_NAME-MeteringRecordsV2 \
+    --table-name YOUR_STACK_NAME-MeteringRecords \
     --key '{"customerAWSAccountId":{"S":"123456789012"},"create_timestamp":{"N":"1708012345678"}}' \
     --update-expression "SET metering_pending = :p, metering_failed = :f" \
     --expression-attribute-values '{":p":{"S":"true"},":f":{"BOOL":false}}'</code></pre>
@@ -304,7 +304,7 @@ aws logs tail /aws/lambda/YOUR_STACK_NAME-MeteringProcessor --follow</code></pre
         {
             "Effect": "Allow",
             "Action": "dynamodb:PutItem",
-            "Resource": "arn:aws:dynamodb:REGION:ACCOUNT:table/STACK_NAME-MeteringRecordsV2"
+            "Resource": "arn:aws:dynamodb:REGION:ACCOUNT:table/STACK_NAME-MeteringRecords"
         }
     ]
 }</code></pre>
