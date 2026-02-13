@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Generated diagrams (large binary files)
+generated-diagrams/
+
+# Reference repo (has its own git)
+aws-marketplace-serverless-saas-integration/
+
+# Architecture diagram drafts
+arch-v2.png
+
+# Old/reference files (superseded by CloudFormation template)
+bin/
+deploy/
+landing-page.html
+landing-page.js
+generate-pptx.py
+generator-hosting.yaml
+
+# Generated template (build artifact from the generator)
+marketplace-template.yaml
+
+# Temp files
+*.tmp
+~$*
