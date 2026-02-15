@@ -58,7 +58,7 @@ A [Terraform version](https://github.com/kevken1000/mp-registration-Page/tree/ma
 After deployment (~5 minutes):
 
 1. Confirm the SNS email subscription sent to your admin email
-2. Copy the CloudFront URL from the stack outputs
+2. Copy the CloudFront URL from the [stack outputs](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks)
 3. Set it as the fulfillment URL in the [Marketplace Management Portal](https://aws.amazon.com/marketplace/management/products)
 
 That is the entire setup. Skip to [Testing your integration](#testing-your-integration) to verify it works.
