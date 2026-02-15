@@ -38,6 +38,12 @@ variable "header_color" {
   default     = "darkslategray"
 }
 
+variable "page_title" {
+  description = "Page heading (defaults to Welcome to [company_name] AWS Marketplace Registration Page)"
+  type        = string
+  default     = ""
+}
+
 variable "logo_url" {
   description = "Company logo URL"
   type        = string

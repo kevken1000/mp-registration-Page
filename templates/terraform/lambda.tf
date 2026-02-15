@@ -139,7 +139,8 @@ resource "aws_lambda_function" "deploy_landing_page" {
       COLOR1  = var.primary_color
       COLOR2  = var.header_color
       LOGO    = var.logo_url
-      WELCOME = var.welcome_message
+      WELCOME    = var.welcome_message
+      PAGE_TITLE = var.page_title
     }
   }
 }
@@ -159,7 +160,8 @@ resource "aws_lambda_invocation" "deploy_landing_page" {
     color1  = var.primary_color
     color2  = var.header_color
     logo    = var.logo_url
-    welcome = var.welcome_message
+    welcome    = var.welcome_message
+    page_title = var.page_title
     api_url = aws_apigatewayv2_api.api.api_endpoint
   }
 
