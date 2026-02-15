@@ -161,7 +161,7 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 | `templates/cloudformation-template.yaml` | The CloudFormation template |
 | `templates/terraform/` | Terraform module (equivalent to the CloudFormation template) |
 | `METERING.md` | Metering integration reference |
-| `workshop-content/` | Integration and metering guides |
+| `workshop-guides/` | Integration and metering guides |
 
 ## Production Considerations
 
