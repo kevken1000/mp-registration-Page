@@ -53,7 +53,7 @@ aws cloudformation create-stack \
     --region us-east-1
 ```
 
-You can also deploy from the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create). Upload the template and fill in the parameters.
+You can also deploy from the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create). Upload the [template](https://github.com/kevken1000/mp-registration-Page/blob/main/templates/cloudformation-template.yaml) and fill in the parameters.
 
 <!-- TODO: Screenshot of CloudFormation create stack parameters page -->
 ![CloudFormation Parameters](images/cfn-parameters.png)
