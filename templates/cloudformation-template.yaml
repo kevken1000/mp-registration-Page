@@ -759,7 +759,7 @@ Resources:
       - ApiStage
     Properties:
       ServiceToken: !GetAtt DeployLandingPageFunction.Arn
-      Version: '5'
+      Version: '6'
 
 Outputs:
   LandingPageBucket:
