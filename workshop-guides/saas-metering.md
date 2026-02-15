@@ -1,6 +1,6 @@
-# SaaS Metering Integration with AWS Marketplace
+# Lab: SaaS Metering Integration with AWS Marketplace
 
-This guide covers how to report customer usage to AWS Marketplace for products with usage-based pricing. If your product is contract-only with no consumption component, you don't need this.
+In this lab, you will set up usage metering for your SaaS product listed on AWS Marketplace. You will learn how to write usage records from your application and submit them to the `BatchMeterUsage` API. If you deployed the sample solution, the metering pipeline is already running and you only need to write records to the DynamoDB table.
 
 ## When metering applies
 
@@ -12,13 +12,34 @@ This guide covers how to report customer usage to AWS Marketplace for products w
 
 ## How metering works
 
+The following diagram shows the metering pipeline flow:
+
+```
+Your SaaS Application
+        ↓ (writes usage records)
+DynamoDB (MeteringRecords table)
+        ↓ (hourly)
+EventBridge Rule → Metering Job Lambda
+        ↓ (aggregated batches)
+SQS Queue → Metering Processor Lambda → BatchMeterUsage API
+        ↓
+DynamoDB (records marked as processed)
+```
+
 1. Your application tracks customer usage (API calls, data processed, users, etc.)
 2. You write usage records to a staging table (DynamoDB)
-3. A scheduled job aggregates pending records
+3. A scheduled job aggregates pending records every hour
 4. The aggregated usage is submitted to the AWS Marketplace `BatchMeterUsage` API
 5. Each record is marked as processed
 
 The key API is `BatchMeterUsage`. It accepts up to 25 usage records per call, each specifying a customer, a dimension (your pricing unit), a quantity, and a timestamp.
+
+## Prerequisites
+
+Before starting this lab, you must have:
+
+- Completed the [SaaS Integration](saas-integration.md) lab (registration page, ResolveCustomer, subscriber storage)
+- Pricing dimensions defined in your Marketplace listing (e.g., "ApiCalls", "DataProcessedGB", "Users")
 
 ## What the sample solution deploys for you
 
@@ -31,20 +52,13 @@ If you deployed the [sample CloudFormation template or Terraform module](https:/
 - Metering processor Lambda that calls `BatchMeterUsage` and marks records as processed
 - IAM roles with `aws-marketplace:BatchMeterUsage` permission
 
-The only thing you need to do is write usage records to the MeteringRecords table from your application. That's covered below.
+If you deployed the sample solution, skip to [Step 1: Write usage records from your application](#step-1-write-usage-records-from-your-application). If you are building the pipeline yourself, see [Reference: Pipeline code](#reference-pipeline-code) at the end of this lab.
 
-If you're building the metering pipeline yourself, the code for each component is included in the [Reference: pipeline code](#reference-pipeline-code) section at the end.
-
-## Prerequisites
-
-- Completed the [SaaS Integration](saas-integration.md) guide (registration page, ResolveCustomer, subscriber storage)
-- Pricing dimensions defined in your Marketplace listing (e.g., "ApiCalls", "DataProcessedGB", "Users")
-
-## Writing usage records from your application
+## Step 1: Write usage records from your application
 
 Your SaaS application writes records to the MeteringRecords DynamoDB table whenever billable usage occurs. The table name is in the stack outputs (`MeteringTableName`).
 
-Each record needs these attributes:
+Each record needs the following attributes:
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -55,7 +69,7 @@ Each record needs these attributes:
 | `quantity` | Number | How many units were consumed |
 | `metering_pending` | String | Must be `"true"` for the pipeline to pick it up |
 
-**Node.js:**
+The following code example shows how to write a usage record in Node.js:
 
 ```javascript
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -75,7 +89,7 @@ await dynamodb.send(new PutCommand({
 }));
 ```
 
-**Python:**
+The following code example shows the same operation in Python:
 
 ```python
 import boto3
@@ -94,24 +108,29 @@ table.put_item(Item={
 })
 ```
 
-Tips:
+Note the following:
 - Write records as close to the usage event as possible
 - Usage records are not accepted more than 6 hours after the event
 - Use the customer's `customerAWSAccountId` (returned by `ResolveCustomer` during registration)
-- The `dimension` must match a pricing dimension defined in your Marketplace listing
+- The `dimension` value must match a pricing dimension defined in your Marketplace listing
 
-## Verifying metering is working
+## Step 2: Verify metering is working
+
+To verify the pipeline is processing your records:
 
 1. Write a test record to the metering table with `metering_pending = "true"`
-2. Wait for the hourly job to run (or invoke the metering job Lambda manually from the console)
-3. Check the metering table: the record should have `metering_pending = "false"` and a `metering_response` with the API result
+2. Wait for the hourly job to run, or invoke the metering job Lambda manually from the Lambda console
+3. Check the metering table: the record should now have `metering_pending = "false"` and a `metering_response` with the API result
 4. If `metering_failed = true`, check the `metering_response` for the error message
 
-Common errors:
-- **InvalidProductCodeException**: The product code doesn't match your listing
-- **InvalidCustomerIdentifierException**: The customer ID or account ID isn't recognized
-- **TimestampOutOfBoundsException**: The usage timestamp is more than 6 hours old
-- **ThrottlingException**: You're sending too many requests. The SQS queue handles retry automatically
+The following are common errors and their causes:
+
+| Error | Cause |
+|-------|-------|
+| `InvalidProductCodeException` | The product code does not match your listing |
+| `InvalidCustomerIdentifierException` | The customer ID or account ID is not recognized |
+| `TimestampOutOfBoundsException` | The usage timestamp is more than 6 hours old |
+| `ThrottlingException` | Too many requests. The SQS queue handles retry automatically |
 
 ## BatchMeterUsage API notes
 
@@ -124,30 +143,27 @@ Common errors:
 
 ## Monitoring
 
-Set up CloudWatch alarms for:
-- Metering job Lambda errors (any invocation failure means usage isn't being reported)
+Set up CloudWatch alarms for the following:
+
+- Metering job Lambda errors (any invocation failure means usage is not being reported)
 - SQS queue depth (messages piling up means the processor is failing)
 - DynamoDB records where `metering_failed = true` (scan periodically or add a GSI)
 
-## Architecture
+## Clean up
 
-```
-Your SaaS Application
-        ↓ (writes usage records)
-DynamoDB (MeteringRecords table)
-        ↓ (hourly)
-EventBridge Rule → Metering Job Lambda
-        ↓ (aggregated batches)
-SQS Queue → Metering Processor Lambda → BatchMeterUsage API
-        ↓
-DynamoDB (records marked as processed)
-```
+If you deployed the sample solution and want to remove it, follow the clean up steps in the [SaaS Integration](saas-integration.md) lab.
 
-## Reference: pipeline code
+## Conclusion
 
-If you're building the metering pipeline yourself instead of using the sample solution, here's the code for each component.
+In this lab, you configured usage metering for your SaaS product on AWS Marketplace. Your application writes usage records to the MeteringRecords DynamoDB table, and the metering pipeline aggregates and submits them to the `BatchMeterUsage` API every hour.
+
+## Reference: Pipeline code
+
+If you are building the metering pipeline yourself instead of using the sample solution, the following sections contain the code for each component.
 
 ### Metering records table
+
+Create a DynamoDB table with the following schema:
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
@@ -160,11 +176,11 @@ If you're building the metering pipeline yourself instead of using the sample so
 | `metering_failed` | Boolean | Set to true if submission failed |
 | `metering_response` | String | The API response (for debugging) |
 
-Add a GSI on `metering_pending` + `create_timestamp` so you can efficiently query for records that haven't been submitted yet. Optionally, add a GSI on `productCode` + `create_timestamp` to query usage by product.
+Add a Global Secondary Index (GSI) on `metering_pending` + `create_timestamp` so you can efficiently query for records that have not been submitted yet. Optionally, add a GSI on `productCode` + `create_timestamp` to query usage by product.
 
 ### Hourly aggregation job
 
-A scheduled Lambda function runs every hour to collect pending records and send them for processing.
+Create a Lambda function triggered by an EventBridge rule with the schedule expression `rate(1 hour)`. This function queries pending records and sends aggregated batches to an SQS queue.
 
 ```javascript
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -208,11 +224,9 @@ exports.handler = async () => {
 };
 ```
 
-Trigger with an EventBridge rule: `rate(1 hour)`
-
 ### Metering processor
 
-A Lambda function consumes messages from the SQS queue and calls `BatchMeterUsage`.
+Create a Lambda function triggered by the SQS queue. This function calls `BatchMeterUsage` and marks records as processed.
 
 ```javascript
 const { MarketplaceMetering } = require('@aws-sdk/client-marketplace-metering');
@@ -272,7 +286,8 @@ exports.handler = async (event) => {
 };
 ```
 
-Required IAM permission:
+Your Lambda execution role needs the following IAM permission:
+
 ```json
 {
     "Effect": "Allow",
