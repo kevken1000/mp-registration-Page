@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" modified="2026-02-16" type="device">
+  <diagram name="SaaS Registration Flow" id="reg-flow">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Buyer -->
+        <mxCell id="buyer" value="Buyer" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;labelBackgroundColor=none;sketch=0;fontStyle=1;fontSize=11;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- AWS Marketplace -->
+        <mxCell id="mp" value="AWS Marketplace" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#E7157B;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.marketplace" vertex="1" parent="1">
+          <mxGeometry x="200" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- CloudFront -->
+        <mxCell id="cf" value="CloudFront" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#8C4FFF;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront" vertex="1" parent="1">
+          <mxGeometry x="360" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- Lambda@Edge -->
+        <mxCell id="edge" value="Lambda@Edge" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#ED7100;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda" vertex="1" parent="1">
+          <mxGeometry x="360" y="80" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- S3 -->
+        <mxCell id="s3" value="S3 Landing Page" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#3F8624;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3" vertex="1" parent="1">
+          <mxGeometry x="360" y="340" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- API Gateway -->
+        <mxCell id="apigw" value="API Gateway" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#E7157B;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway" vertex="1" parent="1">
+          <mxGeometry x="560" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- Register Lambda -->
+        <mxCell id="reg" value="Register Lambda" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#ED7100;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda" vertex="1" parent="1">
+          <mxGeometry x="760" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- DynamoDB -->
+        <mxCell id="ddb" value="DynamoDB" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#C925D1;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb" vertex="1" parent="1">
+          <mxGeometry x="960" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- SNS -->
+        <mxCell id="sns" value="SNS" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=none;fillColor=#E7157B;labelBackgroundColor=none;align=center;fontStyle=1;fontSize=11;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns" vertex="1" parent="1">
+          <mxGeometry x="1160" y="206" width="48" height="48" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="buyer" target="mp" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1l" value="Subscribe" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="mp" target="cf" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a2l" value="POST token" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=1;dashed=1;" edge="1" source="cf" target="edge" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a3l" value="POST→GET" style="edgeLabel;fontSize=9;fontColor=#545b64;" vertex="1" connectable="0" parent="a3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=1;dashed=1;" edge="1" source="cf" target="s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a4l" value="Serves page" style="edgeLabel;fontSize=9;fontColor=#545b64;" vertex="1" connectable="0" parent="a4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="cf" target="apigw" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a5l" value="Form submit" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="apigw" target="reg" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6l" value="/register" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a7" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="reg" target="ddb" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a7l" value="Save subscriber" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a8" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#232F3E;strokeWidth=2;" edge="1" source="reg" target="sns" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="784" y="160"/><mxPoint x="1184" y="160"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a8l" value="Notify admin" style="edgeLabel;fontSize=10;fontColor=#545b64;" vertex="1" connectable="0" parent="a8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

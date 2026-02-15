@@ -53,13 +53,25 @@ aws cloudformation create-stack \
     --region us-east-1
 ```
 
+You can also deploy from the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create). Upload the template and fill in the parameters.
+
+<!-- TODO: Screenshot of CloudFormation create stack parameters page -->
+![CloudFormation Parameters](images/cfn-parameters.png)
+
 A [Terraform version](https://github.com/kevken1000/mp-registration-Page/tree/main/templates/terraform) is also available.
 
 After deployment (~5 minutes):
 
 1. Confirm the SNS email subscription sent to your admin email
 2. Copy the CloudFront URL from the [stack outputs](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks)
+
+<!-- TODO: Screenshot of CloudFormation stack outputs tab showing CloudFront URL -->
+![Stack Outputs](images/cfn-outputs.png)
+
 3. Set it as the fulfillment URL in the [Marketplace Management Portal](https://aws.amazon.com/marketplace/management/products)
+
+<!-- TODO: Screenshot of Marketplace Management Portal fulfillment URL field -->
+![Fulfillment URL](images/marketplace-fulfillment-url.png)
 
 The solution is now deployed. Proceed to [Testing your integration](#testing-your-integration) to verify it works.
 
@@ -226,9 +238,20 @@ To verify your integration is working:
 2. Choose "View on AWS Marketplace" to see the buyer experience
 3. Subscribe to your own product as a test buyer
 4. Verify you are redirected to your registration page with the token
+
+<!-- TODO: Screenshot of the deployed landing page in a browser -->
+![Landing Page](images/landing-page.png)
+
 5. Complete the registration form
 6. Check DynamoDB for the new subscriber record
+
+<!-- TODO: Screenshot of DynamoDB console showing the subscriber record -->
+![DynamoDB Subscriber](images/dynamodb-subscriber.png)
+
 7. Check your email for the SNS notification
+
+<!-- TODO: Screenshot of the SNS notification email -->
+![SNS Notification](images/sns-notification.png)
 
 For detailed testing guidance, see [Successfully testing your SaaS listing in AWS Marketplace](https://aws.amazon.com/blogs/awsmarketplace/successfully-testing-your-saas-listing-in-aws-marketplace/).
 
