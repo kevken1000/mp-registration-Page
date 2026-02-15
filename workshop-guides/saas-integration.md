@@ -23,25 +23,9 @@ Before starting this lab, you must have:
 
 ## Architecture
 
-The following diagram shows the end-to-end integration flow you will build in this lab.
+The following diagram shows the registration flow you will build in this lab.
 
-```
-AWS Marketplace Customer
-        ↓ (subscribes)
-AWS Marketplace → POST x-amzn-marketplace-token
-        ↓
-CloudFront → Lambda@Edge (POST → 302 GET with token)
-        ↓
-Registration Page (S3 / your web app)
-        ↓ (form submit)
-API Gateway → Register Lambda → ResolveCustomer API
-        ↓                              ↓
-   DynamoDB (Subscribers)        Returns ProductCode
-        ↓
-   SNS (Admin notification)
-
-EventBridge → Subscription Event Lambda → DynamoDB (status updates)
-```
+![SaaS Registration Flow](saas-registration-flow.png)
 
 <details>
 <summary><h2>Option 1: Deploy the sample solution (fastest)</h2></summary>
