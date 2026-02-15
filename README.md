@@ -161,9 +161,7 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 | `templates/cloudformation-template.yaml` | The CloudFormation template |
 | `templates/terraform/` | Terraform module (equivalent to the CloudFormation template) |
 | `METERING.md` | Metering integration reference |
-| `index.html` | Optional: web-based generator form |
-| `app.js` | Optional: generator form logic |
-| `generator-hosting.yaml` | Optional: CloudFormation template to host the generator |
+| `workshop-content/` | Integration and metering guides |
 
 ## Production Considerations
 
