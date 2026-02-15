@@ -19,7 +19,8 @@ When a customer subscribes to your SaaS product on AWS Marketplace, they need to
 - `AWSMarketplaceSellerFullAccess` IAM permission
 - AWS CLI configured or Console access
 
-## Option 1: Deploy the sample solution (fastest)
+<details>
+<summary><h2>Option 1: Deploy the sample solution (fastest)</h2></summary>
 
 A sample CloudFormation template deploys everything in one step: registration page, APIs, database, subscription handling, and metering pipeline.
 
@@ -43,7 +44,10 @@ After deployment (~5 minutes):
 
 That's the entire setup. Skip to [Testing your integration](#testing-your-integration) to verify it works.
 
-## Option 2: Build it yourself (step by step)
+</details>
+
+<details>
+<summary><h2>Option 2: Build it yourself (step by step)</h2></summary>
 
 If you prefer to build the integration into your existing infrastructure, follow these steps.
 
@@ -186,6 +190,8 @@ In the [Marketplace Management Portal](https://aws.amazon.com/marketplace/manage
 1. Select your SaaS product
 2. Set the fulfillment URL to your registration page URL (CloudFront domain or custom domain)
 3. Submit the update
+
+</details>
 
 ## Testing your integration
 
