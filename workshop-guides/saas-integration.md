@@ -4,13 +4,13 @@ In this lab, you will integrate your SaaS product with AWS Marketplace. You will
 
 ## What you will build
 
-When a customer subscribes to your SaaS product on AWS Marketplace, AWS Marketplace redirects them to your registration landing page. Your integration needs to:
+When a customer subscribes to your SaaS product on AWS Marketplace, AWS Marketplace redirects them to your registration landing page. Your registration page needs to include the following integration:
 
 1. Accept the customer from AWS Marketplace (receive a token via POST)
 2. Verify the customer by calling `ResolveCustomer` (exchange the token for a customer ID and product code)
 3. Store the customer's registration details
 4. Listen for subscription changes (new, amended, cancelled)
-5. (Optional) Report usage for metered or consumption pricing
+5. Report usage for metered or consumption pricing (required for SaaS Subscriptions and Contracts with Consumption)
 
 ## Prerequisites
 
