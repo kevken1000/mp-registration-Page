@@ -27,13 +27,13 @@ Parameters:
 
   PrimaryColor:
     Type: String
-    Default: '#0073bb'
-    Description: Primary brand color
+    Default: 'dodgerblue'
+    Description: Primary brand color (CSS color name or hex code)
 
   HeaderColor:
     Type: String
-    Default: '#232f3e'
-    Description: Header background color
+    Default: 'darkslategray'
+    Description: Header background color (CSS color name or hex code)
 
   LogoUrl:
     Type: String

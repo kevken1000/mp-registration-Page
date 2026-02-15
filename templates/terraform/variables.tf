@@ -27,15 +27,15 @@ variable "hosted_zone_id" {
 }
 
 variable "primary_color" {
-  description = "Primary brand color"
+  description = "Primary brand color (CSS color name or hex code)"
   type        = string
-  default     = "#0073bb"
+  default     = "dodgerblue"
 }
 
 variable "header_color" {
-  description = "Header background color"
+  description = "Header background color (CSS color name or hex code)"
   type        = string
-  default     = "#232f3e"
+  default     = "darkslategray"
 }
 
 variable "logo_url" {
