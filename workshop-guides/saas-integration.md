@@ -35,7 +35,7 @@ aws cloudformation create-stack \
     --region us-east-1
 ```
 
-A Terraform version is also available. See the [GitHub repository](https://github.com/kevken1000/mp-registration-Page) for both options.
+A [Terraform version](https://github.com/kevken1000/mp-registration-Page/tree/main/templates/terraform) is also available.
 
 After deployment (~5 minutes):
 1. Confirm the SNS email subscription
