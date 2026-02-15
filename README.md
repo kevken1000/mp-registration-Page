@@ -1,6 +1,6 @@
-# AWS Marketplace SaaS Registration Page Deployer
+# AWS Marketplace SaaS Registration Page
 
-Deploy a branded AWS Marketplace SaaS registration landing page using CloudFormation or Terraform.
+A sample solution that deploys a branded AWS Marketplace SaaS registration landing page using CloudFormation or Terraform. Use it as a starting point and customize it for your production environment.
 
 ## What This Solves
 
@@ -162,6 +162,20 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 | `index.html` | Optional: web-based generator form |
 | `app.js` | Optional: generator form logic |
 | `generator-hosting.yaml` | Optional: CloudFormation template to host the generator |
+
+## Production Considerations
+
+This sample solution handles registration, metering, and subscription lifecycle out of the box. For a production deployment, consider the following:
+
+- **Provisioning logic:** Connect the DynamoDB Subscribers table to your SaaS application so new registrations automatically trigger account creation or onboarding workflows. The table has DynamoDB Streams enabled for this purpose.
+- **Entitlement checking:** For contract-based products, call `GetEntitlements` in your application to verify what tier or quantity a customer purchased. This is application-level logic that varies by product.
+- **Error handling and DLQs:** Add dead-letter queues to the metering SQS queue and Lambda functions to capture failed records for retry or investigation.
+- **Monitoring:** Set up CloudWatch alarms on the registration Lambda error rate, metering job failures, and DynamoDB throttling. Consider adding dashboards for subscriber counts and metering volumes.
+- **WAF:** Add AWS WAF to the CloudFront distribution to protect against abuse or bot traffic on the registration page.
+- **Backup:** Enable DynamoDB point-in-time recovery on both tables to protect subscriber and metering data.
+- **Logging:** The Lambda functions log to CloudWatch. For production, consider structured logging and a centralized log aggregation solution.
+- **Testing:** Use the [AWS Marketplace Integration Testing](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-integration-testing.html) guide to test the registration flow with test customers before going public.
+- **Custom registration fields:** Modify the deploy Lambda and registration Lambda to add fields specific to your product (e.g., preferred region, team size, use case).
 
 ## Known Issues
 
