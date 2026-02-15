@@ -27,6 +27,14 @@ The following diagram shows the registration flow you will build in this lab.
 
 ![SaaS Registration Flow](saas-registration-flow.png)
 
+1. Buyer subscribes to your product on AWS Marketplace
+2. AWS Marketplace sends a POST with `x-amzn-marketplace-token` to your CloudFront URL
+3. Lambda@Edge converts the POST to a GET redirect with the token as a query parameter
+4. CloudFront serves the branded landing page from S3
+5. Buyer fills out the registration form, which submits to API Gateway
+6. The Register Lambda calls `ResolveCustomer` to verify the token and stores the subscriber in DynamoDB
+7. SNS sends a notification email to the seller admin
+
 <details>
 <summary><h2>Option 1: Deploy the sample solution (fastest)</h2></summary>
 
