@@ -1,6 +1,28 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'AWS Marketplace SaaS Landing Page - Simplified Deployment'
 
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Required
+        Parameters:
+          - CompanyName
+          - AdminEmail
+      - Label:
+          default: Branding (optional)
+        Parameters:
+          - PrimaryColor
+          - HeaderColor
+          - LogoUrl
+          - WelcomeMessage
+      - Label:
+          default: Custom Domain (optional)
+        Parameters:
+          - CustomDomain
+          - HostedZoneId
+          - AcmCertificateArn
+
 Parameters:
   CompanyName:
     Type: String
