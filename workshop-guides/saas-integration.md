@@ -245,7 +245,7 @@ To verify your integration is working:
 6. Check DynamoDB for the new subscriber record
 
 <!-- TODO: Screenshot of DynamoDB console showing the subscriber record -->
-[![DynamoDB Subscriber](images/dynamodb-subscriber.png)](images/dynamodb-subscriber.png)
+![DynamoDB Subscriber](images/dynamodb-subscriber.png)
 
 7. Check your email for the SNS notification
 
