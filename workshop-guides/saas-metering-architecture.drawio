@@ -1,66 +1,101 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.4.0">
   <diagram name="Metering Pipeline" id="metering-pipeline">
-    <mxGraphModel dx="1556" dy="816" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="600" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="1297" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="600" background="light-dark(#FFFFFF,#FFFFFF)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3E;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.general_AWS_Cloud;" value="Your SaaS&lt;br&gt;Application" vertex="1">
-          <mxGeometry height="60" width="60" x="30" y="100" as="geometry" />
+        <mxCell id="6" parent="1" style="outlineConnect=0;fontColor=light-dark(#232F3E,#020203);gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;SQS Queue&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="537" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="3" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;" value="MeteringRecords&lt;br&gt;Table" vertex="1">
-          <mxGeometry height="60" width="60" x="210" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-32" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];gradientDirection=north;outlineConnect=0;fontColor=light-dark(#232F3E,#000000);gradientColor=none;fillColor=#1E262E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.marketplace;whiteSpace=wrap;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;BatchMeterUsage API&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="830" y="221" as="geometry" />
         </mxCell>
-        <mxCell id="4" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;" value="EventBridge&lt;br&gt;Rule (hourly)" vertex="1">
-          <mxGeometry height="60" width="60" x="350" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-33" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0)); font-size: 10px;&quot;&gt;Metering Processor&lt;br&gt;Lambda&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="680" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="5" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" value="Metering Job&lt;br&gt;Lambda" vertex="1">
-          <mxGeometry height="60" width="60" x="500" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-35" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;whiteSpace=wrap;" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0)); font-size: 10px;&quot;&gt;&lt;font style=&quot;&quot;&gt;Lambda&amp;nbsp;&lt;/font&gt;&lt;span&gt;Metering&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="384" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="7" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;" value="Metering Processor&lt;br&gt;Lambda" vertex="1">
-          <mxGeometry height="60" width="60" x="800" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-41" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;EventBridge&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0)); background-color: transparent;&quot;&gt;&amp;nbsp;Rule (hourly)&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="214" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="8" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.marketplace;" value="BatchMeterUsage&lt;br&gt;API" vertex="1">
-          <mxGeometry height="60" width="60" x="970" y="100" as="geometry" />
-        </mxCell>
-        <mxCell id="10" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;" target="3" value="writes usage">
+        <mxCell id="NGDbc7ReFF0H782KryMm-68" edge="1" parent="1" source="NGDbc7ReFF0H782KryMm-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="NGDbc7ReFF0H782KryMm-43" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="11" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;" target="5" value="triggers">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-42" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=light-dark(#232F3E,#000000);fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;whiteSpace=wrap;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;DynamoDB Metering Records&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="214" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="12" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;fontSize=11;fontColor=#666666;" target="3" value="queries pending records">
-          <mxGeometry relative="1" x="0.2857" y="-20" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="530" y="50" />
-              <mxPoint x="240" y="50" />
-            </Array>
-            <mxPoint x="680" y="90" as="sourcePoint" />
-            <mxPoint x="230" y="90" as="targetPoint" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-43" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=light-dark(#232F3D,#000000);strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.users;" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0)); font-size: 10px;&quot;&gt;SaaS Application&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="60" x="50" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-49" edge="1" parent="1" source="NGDbc7ReFF0H782KryMm-43" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);" target="NGDbc7ReFF0H782KryMm-42" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="110" y="119.17" as="sourcePoint" />
+            <mxPoint x="209" y="119.59000000000002" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="13" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;" target="6" value="sends batches">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="14" edge="1" parent="1" source="6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;" target="7" value="triggers">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="15" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=#666666;" target="8" value="submits usage">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="16" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;fontSize=11;fontColor=#999999;" target="3" value="marks processed records">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="NGDbc7ReFF0H782KryMm-51" edge="1" parent="1" source="NGDbc7ReFF0H782KryMm-33" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;dashPattern=8 8;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
             <Array as="points">
-              <mxPoint x="830" y="250" />
-              <mxPoint x="240" y="250" />
+              <mxPoint x="710" y="40" />
+              <mxPoint x="430" y="40" />
+              <mxPoint x="250" y="40" />
+              <mxPoint x="240" y="40" />
             </Array>
+            <mxPoint x="780" y="40" as="sourcePoint" />
+            <mxPoint x="240" y="80" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6" parent="1" style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;" value="SQS Queue" vertex="1">
-          <mxGeometry height="60" width="60" x="670" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-54" edge="1" parent="1" source="NGDbc7ReFF0H782KryMm-33" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);" target="NGDbc7ReFF0H782KryMm-32" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="508" y="249.58" as="sourcePoint" />
+            <mxPoint x="598" y="249.58" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="NGDbc7ReFF0H782KryMm-20" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];gradientDirection=north;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#1E262E;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.marketplace;" value="&lt;span&gt;&lt;span style=&quot;color: rgb(189, 199, 212); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important; background-color: rgb(27, 29, 30);&quot;&gt;BatchMeterUsage&lt;/span&gt;&lt;br style=&quot;forced-color-adjust: none; color: rgb(189, 199, 212); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; box-shadow: none !important; background-color: rgb(27, 29, 30);&quot;&gt;&lt;span style=&quot;color: rgb(189, 199, 212); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important; background-color: rgb(27, 29, 30);&quot;&gt;API&lt;/span&gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="60" width="60" x="1110" y="100" as="geometry" />
+        <mxCell id="NGDbc7ReFF0H782KryMm-55" edge="1" parent="1" source="6" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);" target="NGDbc7ReFF0H782KryMm-33" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="567" y="220" as="sourcePoint" />
+            <mxPoint x="567" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-56" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="444" y="250" as="sourcePoint" />
+            <mxPoint x="538" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-57" edge="1" parent="1" source="NGDbc7ReFF0H782KryMm-41" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=light-dark(#000000,#000000);" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="320" y="250.42" as="sourcePoint" />
+            <mxPoint x="385" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-58" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Updates DynamoDB records" vertex="1">
+          <mxGeometry height="40" width="210" x="366" y="15" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-59" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Triggers Metering" vertex="1">
+          <mxGeometry height="20" width="105" x="281" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-65" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Queries Pending Records" vertex="1">
+          <mxGeometry height="20" width="83" x="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-70" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=light-dark(#000000,#000000);dashed=1;dashPattern=8 4 1 4;" target="NGDbc7ReFF0H782KryMm-35" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="414" y="120" />
+            </Array>
+            <mxPoint x="274" y="120" as="sourcePoint" />
+            <mxPoint x="324" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-72" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Submits Usage" vertex="1">
+          <mxGeometry height="40" width="110" x="750" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-73" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Sends Records" vertex="1">
+          <mxGeometry height="40" width="100" x="451" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="NGDbc7ReFF0H782KryMm-74" parent="1" style="text;whiteSpace=wrap;fontColor=light-dark(#000000,#000000);fontSize=10;" value="Triggers Lambda" vertex="1">
+          <mxGeometry height="40" width="100" x="600" y="246" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
