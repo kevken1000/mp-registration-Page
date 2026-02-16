@@ -440,7 +440,7 @@ Resources:
                       await sns.send(new PublishCommand({
                           TopicArn: process.env.SNS_TOPIC_ARN,
                           Subject: 'Metering Failed: ' + failures.length + ' record(s)',
-                          Message: 'The following metering submissions failed:\n\n' + failures.join('\n\n')
+                          Message: 'The following metering submissions failed:\n\n' + failures.join('\n\n') + '\n\nFailed records have been removed from the processing queue and will not be retried automatically.\n\nTo retry after fixing the issue, update each record in the MeteringRecords DynamoDB table:\n  - Set metering_pending to "true"\n  - Set metering_failed to false\n\nThe next hourly metering job will pick them up again.'
                       }));
                   } catch (snsErr) { console.error('SNS notification error:', snsErr); }
               }
