@@ -49,8 +49,8 @@ exports.handler = async (event) => {
                 await dynamodb.send(new UpdateCommand({
                     TableName: process.env.METERING_TABLE,
                     Key: { customerAWSAccountId: item.customerAWSAccountId, create_timestamp: item.create_timestamp },
-                    UpdateExpression: 'SET metering_failed = :fail, metering_response = :r',
-                    ExpressionAttributeValues: { ':fail': true, ':r': error.message }
+                    UpdateExpression: 'SET metering_pending = :f, metering_failed = :fail, metering_response = :r',
+                    ExpressionAttributeValues: { ':f': 'false', ':fail': true, ':r': error.message }
                 }));
             }
             failures.push('Product: ' + data.productCode + ' | Customer: ' + data.customerAWSAccountId + ' | Dimension: ' + data.dimension + ' | Quantity: ' + data.quantity + ' | Error: ' + error.message);

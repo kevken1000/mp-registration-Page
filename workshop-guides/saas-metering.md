@@ -190,10 +190,11 @@ aws events describe-rule --name <StackName>-MeteringSchedule --region us-east-1
 
 ### Failed metering records
 
-Failed records remain in the table with `metering_failed = true`. To retry:
+Failed records are automatically removed from the processing queue (`metering_pending` is set to `"false"`) so they are not reprocessed every hour. You will receive an SNS email listing the failures. To retry a failed record:
 
-1. Update the record to set `metering_pending = "true"` and `metering_failed = false`
-2. Wait for the next hourly job, or invoke the metering job manually:
+1. Fix the underlying issue (e.g., correct the dimension name or product code)
+2. Update the record to set `metering_pending = "true"` and `metering_failed = false`
+3. Wait for the next hourly job, or invoke the metering job manually:
 ```bash
 aws lambda invoke \
   --function-name <StackName>-MeteringJob \
@@ -328,8 +329,9 @@ exports.handler = async (event) => {
                         customerAWSAccountId: item.customerAWSAccountId,
                         create_timestamp: item.create_timestamp
                     },
-                    UpdateExpression: 'SET metering_failed = :fail, metering_response = :r',
+                    UpdateExpression: 'SET metering_pending = :f, metering_failed = :fail, metering_response = :r',
                     ExpressionAttributeValues: {
+                        ':f': 'false',
                         ':fail': true,
                         ':r': error.message
                     }
