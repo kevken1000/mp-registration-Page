@@ -1,4 +1,4 @@
-# Lab: SaaS Metering Integration with AWS Marketplace
+# Lab: Set Up SaaS Usage Metering for AWS Marketplace
 
 In this lab, you will set up usage metering for your SaaS product listed on AWS Marketplace. You will learn how to write usage records from your application and submit them to the `BatchMeterUsage` API. If you deployed the sample solution, the metering pipeline is already running and you only need to write records to the DynamoDB table.
 
