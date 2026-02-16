@@ -60,7 +60,8 @@ Each record needs the following attributes:
 | `quantity` | Number | How many units were consumed |
 | `metering_pending` | String | Must be `"true"` for the pipeline to pick it up |
 
-The following code example shows how to write a usage record in Node.js:
+<details>
+<summary>The following code example shows how to write a usage record in Node.js:</summary>
 
 ```javascript
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -80,7 +81,10 @@ await dynamodb.send(new PutCommand({
 }));
 ```
 
-The following code example shows the same operation in Python:
+</details>
+
+<details>
+<summary>The following code example shows the same operation in Python:</summary>
 
 ```python
 import boto3
@@ -98,6 +102,8 @@ table.put_item(Item={
     'metering_pending': 'true'
 })
 ```
+
+</details>
 
 Note the following:
 - Write records as close to the usage event as possible
