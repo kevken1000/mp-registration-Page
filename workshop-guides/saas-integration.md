@@ -1,4 +1,4 @@
-# Lab: SaaS Integration with AWS Marketplace
+# Lab: Set Up a SaaS Registration Page for AWS Marketplace
 
 > **Note:** The sample solution provided in this lab is intended for demonstration and learning purposes. Review the [Production Considerations](https://github.com/kevken1000/mp-registration-Page#production-considerations) before deploying to a live environment.
 
