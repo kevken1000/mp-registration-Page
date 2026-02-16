@@ -55,9 +55,6 @@ aws cloudformation create-stack \
 
 You can also deploy from the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create). Upload the [template](https://github.com/kevken1000/mp-registration-Page/blob/main/templates/cloudformation-template.yaml) and fill in the parameters.
 
-<!-- TODO: Screenshot of CloudFormation create stack parameters page -->
-![CloudFormation Parameters](images/cfn-parameters.png)
-
 A [Terraform version](https://github.com/kevken1000/mp-registration-Page/tree/main/templates/terraform) is also available.
 
 After deployment (~5 minutes):
@@ -69,9 +66,6 @@ After deployment (~5 minutes):
 ![Stack Outputs](images/cfn-outputs.png)
 
 3. Set it as the fulfillment URL in the [Marketplace Management Portal](https://aws.amazon.com/marketplace/management/products)
-
-<!-- TODO: Screenshot of Marketplace Management Portal fulfillment URL field -->
-![Fulfillment URL](images/marketplace-fulfillment-url.png)
 
 The solution is now deployed. Proceed to [Testing your integration](#testing-your-integration) to verify it works.
 
@@ -249,9 +243,6 @@ To verify your integration is working:
 ![DynamoDB Subscriber](images/dynamodb-subscriber.png)
 
 7. Check your email for the SNS notification
-
-<!-- TODO: Screenshot of the SNS notification email -->
-![SNS Notification](images/sns-notification.png)
 
 For detailed testing guidance, see [Successfully testing your SaaS listing in AWS Marketplace](https://aws.amazon.com/blogs/awsmarketplace/successfully-testing-your-saas-listing-in-aws-marketplace/).
 
