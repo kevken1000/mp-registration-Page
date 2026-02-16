@@ -140,11 +140,15 @@ The following are common errors and their causes:
 
 ## Monitoring
 
-Set up CloudWatch alarms for the following:
+The sample solution includes a CloudWatch alarm on the Metering Processor Lambda and SNS email notifications when submissions fail. When a metering submission fails, you will receive an email with the error details, the affected record (product, customer, dimension, quantity), and specific guidance on how to resolve the issue. Failed records are automatically removed from the processing queue so you will not receive repeated emails for the same failure.
 
-- Metering job Lambda errors (any invocation failure means usage is not being reported)
-- SQS queue depth (messages piling up means the processor is failing)
-- DynamoDB records where `metering_failed = true` (scan periodically or add a GSI)
+We recommend also monitoring the following:
+
+- Metering Job Lambda errors: if the hourly job fails, no usage is being reported to AWS Marketplace
+- SQS queue depth: messages piling up indicates the processor is not keeping up or is failing
+- DynamoDB records where `metering_failed = true`: scan periodically or add a GSI to catch records that need attention
+
+The following CLI commands can help you check the current state of your metering pipeline.
 
 Check for pending records that have not been submitted yet:
 
