@@ -67,6 +67,9 @@ After deployment (~5 minutes):
 
 3. Set it as the fulfillment URL in the [Marketplace Management Portal](https://aws.amazon.com/marketplace/management/products)
 
+<!-- TODO: Screenshot of Marketplace Management Portal fulfillment URL field -->
+![Fulfillment URL](images/marketplace-fulfillment-url.png)
+
 The solution is now deployed. Proceed to [Testing your integration](#testing-your-integration) to verify it works.
 
 </details>
