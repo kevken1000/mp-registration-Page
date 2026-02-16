@@ -140,6 +140,62 @@ Set up CloudWatch alarms for the following:
 - SQS queue depth (messages piling up means the processor is failing)
 - DynamoDB records where `metering_failed = true` (scan periodically or add a GSI)
 
+Check for pending records that have not been submitted yet:
+
+```bash
+aws dynamodb query \
+  --table-name <StackName>-MeteringRecords \
+  --index-name PendingMeteringRecordsIndex \
+  --key-condition-expression "metering_pending = :pending" \
+  --expression-attribute-values '{":pending":{"S":"true"}}' \
+  --region us-east-1
+```
+
+Check for failed records:
+
+```bash
+aws dynamodb scan \
+  --table-name <StackName>-MeteringRecords \
+  --filter-expression "metering_failed = :failed" \
+  --expression-attribute-values '{":failed":{"BOOL":true}}' \
+  --region us-east-1
+```
+
+View Lambda logs:
+
+```bash
+# Metering Job logs
+aws logs tail /aws/lambda/<StackName>-MeteringJob --follow
+
+# Metering Processor logs
+aws logs tail /aws/lambda/<StackName>-MeteringProcessor --follow
+```
+
+## Troubleshooting
+
+### Records not being processed
+
+1. Verify the EventBridge rule is enabled:
+```bash
+aws events describe-rule --name <StackName>-MeteringSchedule --region us-east-1
+```
+2. Check the metering job Lambda logs for errors
+3. Verify the Lambda execution role has `aws-marketplace:BatchMeterUsage` permission
+
+### Failed metering records
+
+Failed records remain in the table with `metering_failed = true`. To retry:
+
+1. Update the record to set `metering_pending = "true"` and `metering_failed = false`
+2. Wait for the next hourly job, or invoke the metering job manually:
+```bash
+aws lambda invoke \
+  --function-name <StackName>-MeteringJob \
+  --payload '{}' \
+  --region us-east-1 \
+  response.json
+```
+
 ## Clean up
 
 If you deployed the sample solution and want to remove it, follow the clean up steps in the [SaaS Integration](saas-integration.md) lab.
@@ -295,4 +351,3 @@ Your Lambda execution role needs the following IAM permission:
 - [BatchMeterUsage API reference](https://docs.aws.amazon.com/marketplace/latest/APIReference/API_marketplace-metering_BatchMeterUsage.html)
 - [SaaS code examples](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html)
 - [Sample solution with metering included](https://github.com/kevken1000/mp-registration-Page)
-- [METERING.md reference](https://github.com/kevken1000/mp-registration-Page/blob/main/METERING.md)

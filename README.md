@@ -160,7 +160,6 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 |------|---------|
 | `templates/cloudformation-template.yaml` | The CloudFormation template |
 | `templates/terraform/` | Terraform module (equivalent to the CloudFormation template) |
-| `METERING.md` | Metering integration reference |
 | `workshop-guides/` | Integration and metering guides |
 
 ## Production Considerations
@@ -184,5 +183,4 @@ This sample solution handles registration, metering, and subscription lifecycle 
 
 ## See Also
 
-- [METERING.md](METERING.md) — Metering integration guide with code examples
 - [AWS Marketplace SaaS Integration Reference](https://github.com/aws-samples/aws-marketplace-serverless-saas-integration)
