@@ -148,7 +148,8 @@ If you deployed the sample solution and want to remove it, follow the clean up s
 
 In this lab, you configured usage metering for your SaaS product on AWS Marketplace. Your application writes usage records to the MeteringRecords DynamoDB table, and the metering pipeline aggregates and submits them to the `BatchMeterUsage` API every hour.
 
-## Reference: Pipeline code
+<details>
+<summary><h2>Reference: Pipeline code</h2></summary>
 
 If you are building the metering pipeline yourself instead of using the sample solution, the following sections contain the code for each component.
 
@@ -286,6 +287,8 @@ Your Lambda execution role needs the following IAM permission:
     "Resource": "*"
 }
 ```
+
+</details>
 
 ## Resources
 
