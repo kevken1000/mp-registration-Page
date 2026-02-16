@@ -25,7 +25,7 @@ Before starting this lab, you must have:
 
 The following diagram shows the registration flow you will build in this lab.
 
-![SaaS Registration Flow](saas-registration-flow.png)
+![SaaS Registration Flow](images/saas-registration-flow.png)
 
 1. Buyer subscribes to your product on AWS Marketplace
 2. AWS Marketplace sends a POST with `x-amzn-marketplace-token` to your CloudFront URL
