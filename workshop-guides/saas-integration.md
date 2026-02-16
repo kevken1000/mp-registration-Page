@@ -249,6 +249,9 @@ To verify your integration is working:
 
 7. Check your email for the SNS notification
 
+<!-- TODO: Screenshot of the SNS notification email -->
+![SNS Notification](images/sns-notification.png)
+
 For detailed testing guidance, see [Successfully testing your SaaS listing in AWS Marketplace](https://aws.amazon.com/blogs/awsmarketplace/successfully-testing-your-saas-listing-in-aws-marketplace/).
 
 ## What about metering?
