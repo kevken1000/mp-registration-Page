@@ -1,8 +1,10 @@
 const { MarketplaceMetering } = require('@aws-sdk/client-marketplace-metering');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, UpdateCommand } = require('@aws-sdk/lib-dynamodb');
+const { SNSClient, PublishCommand } = require('@aws-sdk/client-sns');
 const marketplace = new MarketplaceMetering();
 const dynamodb = DynamoDBDocumentClient.from(new DynamoDBClient());
+const sns = new SNSClient();
 
 exports.handler = async (event) => {
     console.log('Processing metering records');
@@ -49,6 +51,15 @@ exports.handler = async (event) => {
                     UpdateExpression: 'SET metering_failed = :fail, metering_response = :r',
                     ExpressionAttributeValues: { ':fail': true, ':r': error.message }
                 }));
+            }
+            if (process.env.SNS_TOPIC_ARN) {
+                try {
+                    await sns.send(new PublishCommand({
+                        TopicArn: process.env.SNS_TOPIC_ARN,
+                        Subject: 'Metering Failed: ' + data.productCode,
+                        Message: 'Metering submission failed.\nProduct: ' + data.productCode + '\nCustomer: ' + data.customerAWSAccountId + '\nDimension: ' + data.dimension + '\nQuantity: ' + data.quantity + '\nError: ' + error.message
+                    }));
+                } catch (snsErr) { console.error('SNS notification error:', snsErr); }
             }
         }
     }

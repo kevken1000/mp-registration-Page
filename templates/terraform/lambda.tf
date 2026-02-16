@@ -99,6 +99,7 @@ resource "aws_lambda_function" "metering_processor" {
     variables = {
       METERING_TABLE    = aws_dynamodb_table.metering.name
       SUBSCRIBERS_TABLE = aws_dynamodb_table.subscribers.name
+      SNS_TOPIC_ARN     = aws_sns_topic.notifications.arn
     }
   }
 }
