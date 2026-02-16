@@ -61,7 +61,7 @@ Each record needs the following attributes:
 | `metering_pending` | String | Must be `"true"` for the pipeline to pick it up |
 
 <details>
-<summary>The following code example shows how to write a usage record in Node.js:</summary>
+<summary>Node.js example</summary>
 
 ```javascript
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -84,7 +84,7 @@ await dynamodb.send(new PutCommand({
 </details>
 
 <details>
-<summary>The following code example shows the same operation in Python:</summary>
+<summary>Python example</summary>
 
 ```python
 import boto3
