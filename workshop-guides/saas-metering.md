@@ -10,27 +10,17 @@ In this lab, you will set up usage metering for your SaaS product listed on AWS 
 | SaaS Contracts with Consumption | Yes, for usage beyond contract entitlements |
 | SaaS Contracts (fixed) | No |
 
-## How metering works
+## Architecture
 
-The following diagram shows the metering pipeline flow:
+The following diagram shows the metering pipeline flow.
 
-```
-Your SaaS Application
-        ↓ (writes usage records)
-DynamoDB (MeteringRecords table)
-        ↓ (hourly)
-EventBridge Rule → Metering Job Lambda
-        ↓ (aggregated batches)
-SQS Queue → Metering Processor Lambda → BatchMeterUsage API
-        ↓
-DynamoDB (records marked as processed)
-```
+![SaaS Metering Pipeline](saas-metering-flow.png)
 
-1. Your application tracks customer usage (API calls, data processed, users, etc.)
-2. You write usage records to a staging table (DynamoDB)
-3. A scheduled job aggregates pending records every hour
-4. The aggregated usage is submitted to the AWS Marketplace `BatchMeterUsage` API
-5. Each record is marked as processed
+1. Your SaaS application writes usage records to the MeteringRecords DynamoDB table
+2. An EventBridge rule triggers the Metering Job Lambda every hour
+3. The Metering Job queries pending records and sends aggregated batches to an SQS queue
+4. The SQS queue triggers the Metering Processor Lambda
+5. The Metering Processor calls the `BatchMeterUsage` API and marks records as processed
 
 The key API is `BatchMeterUsage`. It accepts up to 25 usage records per call, each specifying a customer, a dimension (your pricing unit), a quantity, and a timestamp.
 
