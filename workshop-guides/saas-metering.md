@@ -14,7 +14,7 @@ In this lab, you will set up usage metering for your SaaS product listed on AWS 
 
 The following diagram shows the metering pipeline flow.
 
-![SaaS Metering Pipeline](saas-metering-flow.png)
+![SaaS Metering Pipeline](images/saas-metering-flow.png)
 
 1. Your SaaS application writes usage records to the MeteringRecords DynamoDB table
 2. An EventBridge rule triggers the Metering Job Lambda every hour
