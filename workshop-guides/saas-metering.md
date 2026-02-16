@@ -29,6 +29,7 @@ The key API is `BatchMeterUsage`. It accepts up to 25 usage records per call, ea
 Before starting this lab, you must have:
 
 - Completed the [SaaS Integration](saas-integration.md) lab (registration page, ResolveCustomer, subscriber storage)
+- A SaaS product listing with a pricing model that requires metering (SaaS Subscriptions or Contracts with Consumption)
 - Pricing dimensions defined in your Marketplace listing (e.g., "ApiCalls", "DataProcessedGB", "Users")
 
 ## What the sample solution deploys for you
