@@ -464,6 +464,25 @@ Resources:
       Principal: events.amazonaws.com
       SourceArn: !GetAtt MeteringSchedule.Arn
 
+  MeteringProcessorErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-MeteringProcessorErrors'
+      AlarmDescription: Metering processor Lambda is failing to submit usage to AWS Marketplace
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref MeteringProcessorFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref NotificationTopic
+
   SubscriptionEventRule:
     Type: AWS::Events::Rule
     Properties:

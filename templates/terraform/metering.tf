@@ -30,6 +30,23 @@ resource "aws_lambda_permission" "metering_schedule" {
   source_arn    = aws_cloudwatch_event_rule.metering_schedule.arn
 }
 
+resource "aws_cloudwatch_metric_alarm" "metering_processor_errors" {
+  alarm_name          = "${var.stack_name}-MeteringProcessorErrors"
+  alarm_description   = "Metering processor Lambda is failing to submit usage to AWS Marketplace"
+  namespace           = "AWS/Lambda"
+  metric_name         = "Errors"
+  dimensions = {
+    FunctionName = aws_lambda_function.metering_processor.function_name
+  }
+  statistic           = "Sum"
+  period              = 300
+  evaluation_periods  = 1
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  treat_missing_data  = "notBreaching"
+  alarm_actions       = [aws_sns_topic.notifications.arn]
+}
+
 # -----------------------------------------------------------------------------
 # Subscription Lifecycle Events (EventBridge)
 # -----------------------------------------------------------------------------
