@@ -70,6 +70,8 @@ After deployment (~5 minutes):
 <!-- TODO: Screenshot of Marketplace Management Portal fulfillment URL field -->
 ![Fulfillment URL](images/marketplace-fulfillment-url.png)
 
+The URL shown above is an example. Replace it with the CloudFront URL from your own stack outputs.
+
 The solution is now deployed. Proceed to [Testing your integration](#testing-your-integration) to verify it works.
 
 </details>
