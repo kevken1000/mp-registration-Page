@@ -8,6 +8,7 @@ const sns = new SNSClient();
 
 exports.handler = async (event) => {
     console.log('Processing metering records');
+    const failures = [];
     for (const record of event.Records) {
         const data = JSON.parse(record.body);
         try {
@@ -52,16 +53,17 @@ exports.handler = async (event) => {
                     ExpressionAttributeValues: { ':fail': true, ':r': error.message }
                 }));
             }
-            if (process.env.SNS_TOPIC_ARN) {
-                try {
-                    await sns.send(new PublishCommand({
-                        TopicArn: process.env.SNS_TOPIC_ARN,
-                        Subject: 'Metering Failed: ' + data.productCode,
-                        Message: 'Metering submission failed.\nProduct: ' + data.productCode + '\nCustomer: ' + data.customerAWSAccountId + '\nDimension: ' + data.dimension + '\nQuantity: ' + data.quantity + '\nError: ' + error.message
-                    }));
-                } catch (snsErr) { console.error('SNS notification error:', snsErr); }
-            }
+            failures.push('Product: ' + data.productCode + ' | Customer: ' + data.customerAWSAccountId + ' | Dimension: ' + data.dimension + ' | Quantity: ' + data.quantity + ' | Error: ' + error.message);
         }
+    }
+    if (failures.length > 0 && process.env.SNS_TOPIC_ARN) {
+        try {
+            await sns.send(new PublishCommand({
+                TopicArn: process.env.SNS_TOPIC_ARN,
+                Subject: 'Metering Failed: ' + failures.length + ' record(s)',
+                Message: 'The following metering submissions failed:\n\n' + failures.join('\n\n')
+            }));
+        } catch (snsErr) { console.error('SNS notification error:', snsErr); }
     }
     return { statusCode: 200 };
 };
