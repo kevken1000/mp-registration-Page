@@ -1,6 +1,6 @@
 # AWS Marketplace SaaS Registration Page
 
-> **Disclaimer:** This is a sample solution intended for demonstration and learning purposes. It is designed to help sellers understand the AWS Marketplace SaaS integration pattern and is not intended for production use without significant review and customization. The registration page, backend logic, and infrastructure should be adapted to meet your product's specific requirements. Use it at your own risk. Review the [Production Considerations](#production-considerations) section before deploying to a live environment.
+> **Disclaimer:** This is a sample solution intended for demonstration and learning purposes. It is designed to help sellers understand the AWS Marketplace SaaS integration pattern and is not intended for production use without significant review and customization. The registration page, backend logic, and infrastructure should be adapted to meet your product's specific requirements. Review the [Production Considerations](#production-considerations) section before deploying to a live environment.
 
 A sample solution that deploys an AWS Marketplace SaaS registration landing page using CloudFormation or Terraform. Use it as a starting point to learn the integration pattern and customize it for your own product.
 
