@@ -164,11 +164,11 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 ## Production Considerations
 
-This sample solution handles registration, metering, and subscription lifecycle. It is intended as a learning tool and starting point. Before using it for a marketplace listing, you should customize and harden it for your specific product.
+This sample solution handles registration, metering, and subscription lifecycle. It is intended as a learning tool and starting point. Before using it for an AWS Marketplace listing, you should customize and harden it for your specific product.
 
 ### What to customize before going to production
 
-The following changes are recommended before pointing your Marketplace listing to this solution:
+The following changes are recommended before pointing your AWS Marketplace listing to this solution:
 
 - **Registration page:** Replace the sample landing page with your own branded page that matches your product's look and feel. Include support contact information and a login link for existing customers, as required by the [SaaS product guidelines](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-guidelines.html).
 - **Input validation:** Add server-side validation and sanitization of all registration form fields in the Register Lambda.
