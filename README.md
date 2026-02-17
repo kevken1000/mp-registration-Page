@@ -176,6 +176,7 @@ This sample solution handles registration, metering, and subscription lifecycle.
 - **Testing:** Use the [AWS Marketplace Integration Testing](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-integration-testing.html) guide to test the registration flow with test customers before going public.
 - **Custom registration fields:** Modify the deploy Lambda and registration Lambda to add fields specific to your product (e.g., preferred region, team size, use case).
 - **Runtime maintenance:** The Lambda functions use Node.js 18. AWS Lambda runtimes reach end of life periodically. You are responsible for updating the runtime version, applying security patches, and upgrading SDK dependencies after deployment.
+- **PII and data privacy:** The registration form collects personal information (name, email, phone). You are responsible for handling this data in compliance with applicable privacy regulations (e.g., GDPR, CCPA). DynamoDB and S3 encrypt data at rest by default. Consider using customer-managed KMS keys, defining data retention policies, and providing customers a way to request data deletion.
 
 ## Known Issues
 
