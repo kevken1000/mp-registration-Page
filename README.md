@@ -107,7 +107,7 @@ These are passed as parameters (CloudFormation) or variables (Terraform). You ca
 
 ## Architecture
 
-![Architecture](architecture-official.png)
+![Architecture](workshop-guides/images/architecture-official.png)
 
 ```
 AWS Marketplace Customer
