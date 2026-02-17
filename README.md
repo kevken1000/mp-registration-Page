@@ -175,6 +175,7 @@ This sample solution handles registration, metering, and subscription lifecycle 
 - **Logging:** The Lambda functions log to CloudWatch. For production, consider structured logging and a centralized log aggregation solution.
 - **Testing:** Use the [AWS Marketplace Integration Testing](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-integration-testing.html) guide to test the registration flow with test customers before going public.
 - **Custom registration fields:** Modify the deploy Lambda and registration Lambda to add fields specific to your product (e.g., preferred region, team size, use case).
+- **Runtime maintenance:** The Lambda functions use Node.js 18. AWS Lambda runtimes reach end of life periodically. You are responsible for updating the runtime version, applying security patches, and upgrading SDK dependencies after deployment.
 
 ## Known Issues
 
