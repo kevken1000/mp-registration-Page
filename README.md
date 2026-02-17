@@ -1,8 +1,8 @@
 # AWS Marketplace SaaS Registration Page
 
-> **Disclaimer:** This is a sample solution intended for demonstration and learning purposes. It is not intended for production use without review and modification. Use it at your own risk. Review the [Production Considerations](#production-considerations) section before deploying to a live environment.
+> **Disclaimer:** This is a sample solution intended for demonstration and learning purposes. It is designed to help sellers understand the AWS Marketplace SaaS integration pattern and is not intended for production use without significant review and customization. The registration page, backend logic, and infrastructure should be adapted to meet your product's specific requirements. Use it at your own risk. Review the [Production Considerations](#production-considerations) section before deploying to a live environment.
 
-A sample solution that deploys a branded AWS Marketplace SaaS registration landing page using CloudFormation or Terraform. Use it as a starting point and customize it for your production environment.
+A sample solution that deploys an AWS Marketplace SaaS registration landing page using CloudFormation or Terraform. Use it as a starting point to learn the integration pattern and customize it for your own product.
 
 ## What This Solves
 
@@ -164,13 +164,24 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 ## Production Considerations
 
-This sample solution handles registration, metering, and subscription lifecycle. For a production deployment, consider the following:
+This sample solution handles registration, metering, and subscription lifecycle. It is intended as a learning tool and starting point. Before using it for a production listing, you should customize and harden it for your specific product.
 
-- **Provisioning logic:** Connect the DynamoDB Subscribers table to your SaaS application so new registrations automatically trigger account creation or onboarding workflows. The table has DynamoDB Streams enabled for this purpose.
-- **Entitlement checking:** For contract-based products, call `GetEntitlements` in your application to verify what tier or quantity a customer purchased. This is application-level logic that varies by product.
+### What to customize before going to production
+
+The following changes are recommended before pointing your Marketplace listing to this solution:
+
+- **Registration page:** Replace the sample landing page with your own branded page that matches your product's look and feel. Include support contact information and a login link for existing customers, as required by the [SaaS product guidelines](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-guidelines.html).
+- **Input validation:** Add server-side validation and sanitization of all registration form fields in the Register Lambda.
+- **Rate limiting and WAF:** Add AWS WAF to the CloudFront distribution to protect against abuse and bot traffic.
+- **Provisioning logic:** Connect the DynamoDB Subscribers table to your SaaS application so new registrations trigger account creation or onboarding workflows. The table has DynamoDB Streams enabled for this purpose.
+- **Entitlement checking:** For contract-based products, call `GetEntitlements` in your application to verify what tier or quantity a customer purchased.
+
+### Additional production considerations
+
+The following are additional recommendations for a production deployment:
+
 - **Error handling and DLQs:** Add dead-letter queues to the metering SQS queue and Lambda functions to capture failed records for retry or investigation.
 - **Monitoring:** Set up CloudWatch alarms on the registration Lambda error rate, metering job failures, and DynamoDB throttling. Consider adding dashboards for subscriber counts and metering volumes.
-- **WAF:** Add AWS WAF to the CloudFront distribution to protect against abuse or bot traffic on the registration page.
 - **Backup:** Enable DynamoDB point-in-time recovery on both tables to protect subscriber and metering data.
 - **Logging:** The Lambda functions log to CloudWatch. For production, consider structured logging and a centralized log aggregation solution.
 - **Testing:** Use the [AWS Marketplace Integration Testing](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-integration-testing.html) guide to test the registration flow with test customers before going public.
