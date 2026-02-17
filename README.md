@@ -164,7 +164,7 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 ## Production Considerations
 
-This sample solution handles registration, metering, and subscription lifecycle out of the box. For a production deployment, consider the following:
+This sample solution handles registration, metering, and subscription lifecycle. For a production deployment, consider the following:
 
 - **Provisioning logic:** Connect the DynamoDB Subscribers table to your SaaS application so new registrations automatically trigger account creation or onboarding workflows. The table has DynamoDB Streams enabled for this purpose.
 - **Entitlement checking:** For contract-based products, call `GetEntitlements` in your application to verify what tier or quantity a customer purchased. This is application-level logic that varies by product.
