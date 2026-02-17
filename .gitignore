@@ -37,3 +37,10 @@ marketplace-template.yaml
 # Temp files
 *.tmp
 ~$*
+
+# Local dev/test scripts
+generate-arch-diagram.py
+generate-metering-diagram.py
+test-metering.mjs
+test-metering.py
+response.json
