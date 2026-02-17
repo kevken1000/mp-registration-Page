@@ -1,6 +1,6 @@
 # Lab: Set Up a SaaS Registration Page for AWS Marketplace
 
-> **Note:** The sample solution provided in this lab is intended for demonstration and learning purposes. It is designed to help you understand the AWS Marketplace SaaS integration pattern and should be customized before use with a production listing. Review the [Production Considerations](https://github.com/kevken1000/mp-registration-Page#production-considerations) before deploying to a live environment. Once deployed, you are responsible for maintaining the solution, including Lambda runtime updates, security patches, and dependency upgrades.
+> **Note:** The sample solution provided in this lab is intended for demonstration and learning purposes. It is designed to help you understand the AWS Marketplace SaaS integration pattern and should be customized before use with a marketplace listing. Review the [Production Considerations](https://github.com/kevken1000/mp-registration-Page#production-considerations) before deploying to a live environment. Once deployed, you are responsible for maintaining the solution, including Lambda runtime updates, security patches, and dependency upgrades.
 
 In this lab, you will integrate your SaaS product with AWS Marketplace. You will set up a registration landing page, verify customers using the `ResolveCustomer` API, store subscriber data, and handle subscription lifecycle events.
 

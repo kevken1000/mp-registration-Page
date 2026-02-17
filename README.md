@@ -164,7 +164,7 @@ GSIs: `PendingMeteringRecordsIndex` (`metering_pending` + `create_timestamp`), `
 
 ## Production Considerations
 
-This sample solution handles registration, metering, and subscription lifecycle. It is intended as a learning tool and starting point. Before using it for a production listing, you should customize and harden it for your specific product.
+This sample solution handles registration, metering, and subscription lifecycle. It is intended as a learning tool and starting point. Before using it for a marketplace listing, you should customize and harden it for your specific product.
 
 ### What to customize before going to production
 
