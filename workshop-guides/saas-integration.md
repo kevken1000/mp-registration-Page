@@ -264,17 +264,19 @@ For contract-only products with no usage component, metering is not required.
 
 ## Prepare for product review
 
-Before you can update your product's visibility from Limited to Public, the AWS Marketplace Seller Operations team will review and audit your product. As part of this review, the team needs to verify that your integration works end to end. You must provide one of the following:
+Before you can update your product's visibility from Limited to Public, the AWS Marketplace Seller Operations team will review and audit your product. As part of this review, the team needs to verify that your integration works end to end, from subscribing on AWS Marketplace through to accessing your SaaS application.
 
-- Temporary access credentials to your SaaS application so the team can test the subscribe, register, and access flow themselves
-- A video walkthrough that demonstrates the complete customer experience
+The Seller Operations team will subscribe to your product and complete the registration form on your landing page. After registration, they need to verify they can access your SaaS application. You must provide one of the following:
 
-Your video or demo should cover the following:
+1. Login credentials to your SaaS application so the team can verify the full customer experience after registration
+2. If you are unable to provide login access, submit a video walkthrough that demonstrates the complete flow
+
+Your video should cover:
 
 1. Subscribing to the product from the AWS Marketplace listing page
-2. Being redirected to your registration landing page with the marketplace token
+2. Being redirected to the registration landing page
 3. Completing the registration form
-4. Receiving confirmation and gaining access to the SaaS application
+4. Logging in and accessing the SaaS application
 5. If applicable, demonstrating that metering records are being sent via `BatchMeterUsage`
 
 The review process takes 7 to 10 business days. If the team finds issues, the status changes to "Action Required" and you will need to address them before resubmitting. For more information, see [SaaS product guidelines](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-guidelines.html) and [Submitting your product for publication](https://docs.aws.amazon.com/marketplace/latest/userguide/product-submission.html).
