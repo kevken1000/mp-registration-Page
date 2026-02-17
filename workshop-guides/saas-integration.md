@@ -262,6 +262,25 @@ If your product uses usage-based pricing (SaaS Subscriptions or Contracts with C
 
 For contract-only products with no usage component, metering is not required.
 
+## Prepare for product review
+
+Before you can update your product's visibility from Limited to Public, the AWS Marketplace Seller Operations team will review and audit your product. As part of this review, the team needs to verify that your integration works end to end. You must provide one of the following:
+
+- Temporary access credentials to your SaaS application so the team can test the subscribe, register, and access flow themselves
+- A video walkthrough that demonstrates the complete customer experience
+
+Your video or demo should cover the following:
+
+1. Subscribing to the product from the AWS Marketplace listing page
+2. Being redirected to your registration landing page with the marketplace token
+3. Completing the registration form
+4. Receiving confirmation and gaining access to the SaaS application
+5. If applicable, demonstrating that metering records are being sent via `BatchMeterUsage`
+
+The review process takes 7 to 10 business days. If the team finds issues, the status changes to "Action Required" and you will need to address them before resubmitting. For more information, see [SaaS product guidelines](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-guidelines.html) and [Submitting your product for publication](https://docs.aws.amazon.com/marketplace/latest/userguide/product-submission.html).
+
+To contact the Seller Operations team or check the status of your submission, visit the [AWS Marketplace Management Portal](https://aws.amazon.com/marketplace/management/contact-us/).
+
 ## Clean up
 
 If you deployed the sample solution and want to remove it:
