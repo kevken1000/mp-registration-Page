@@ -38,9 +38,9 @@ The following diagram shows the registration flow you will build in this lab.
 7. SNS sends a notification email to the seller admin
 
 <details>
-<summary><h2>Option 1: Deploy the AWS sample solution</h2></summary>
+<summary><h2>Option 1: Deploy the standalone sample solution</h2></summary>
 
-A sample CloudFormation template deploys the complete integration in one step: registration page, APIs, database, subscription handling, and metering pipeline.
+A sample CloudFormation template deploys a standalone registration page with the complete AWS Marketplace integration: landing page, APIs, database, subscription handling, and metering pipeline. This is a standalone solution that does not integrate into your existing SaaS application. It is designed to help you learn the integration pattern and can be customized to connect to your product later.
 
 Run the following command to deploy the stack:
 
@@ -79,9 +79,9 @@ The solution is now deployed. Proceed to [Testing your integration](#testing-you
 </details>
 
 <details>
-<summary><h2>Option 2: Build your own AWS Marketplace integration</h2></summary>
+<summary><h2>Option 2: Integrate your SaaS product with AWS Marketplace</h2></summary>
 
-If you prefer to build the integration into your existing infrastructure, follow these steps.
+If you prefer to build the integration directly into your existing SaaS application, follow these steps.
 
 ### Step 1: Create a registration landing page
 
