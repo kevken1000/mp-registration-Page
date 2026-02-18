@@ -10,6 +10,8 @@ Every SaaS product listed on AWS Marketplace needs a registration page that inte
 
 ## Quick Start
 
+This sample solution deploys a complete AWS Marketplace SaaS registration page and backend integration. It handles the end-to-end flow: accepting customers from AWS Marketplace, verifying them with the `ResolveCustomer` API, storing subscriber data in DynamoDB, processing subscription lifecycle events, and submitting usage metering via `BatchMeterUsage`. Deploy it to learn how the integration works, then customize it for your own product.
+
 Choose CloudFormation or Terraform. Both deploy the same infrastructure in `us-east-1`.
 
 ### Option A: CloudFormation
