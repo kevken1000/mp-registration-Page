@@ -81,7 +81,7 @@ The solution is now deployed. Proceed to [Testing your integration](#testing-you
 <details>
 <summary><h2>Option 2: Integrate your SaaS Application Registration Page with AWS Marketplace</h2></summary>
 
-If you prefer to build the integration directly into your existing SaaS application, follow these steps.
+If you prefer to build the integration directly into your existing SaaS application, follow these steps. This is the recommended approach as it allows customers to access your SaaS application immediately after registration without any manual provisioning steps.
 
 ### Step 1: Create a registration landing page
 
